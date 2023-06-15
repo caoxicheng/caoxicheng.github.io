@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>2022年8月阅读清单 - 靓仔的窝点</title>
+
+  
+    <meta name="description" content="2022年8月阅读清单收获淘系前端团队DNS 查询原理详解 - 阮一峰的网络日志异或运算 XOR 教程 - 阮一峰的网络日志How SHA-256 Works Step-by-Step | Bo...">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2022年8月阅读清单">
+<meta property="og:url" content="https://caoxicheng.github.io/2022/09/01/2022%E5%B9%B48%E6%9C%88%E9%98%85%E8%AF%BB%E6%B8%85%E5%8D%95/index.html">
+<meta property="og:site_name" content="靓仔的窝点">
+<meta property="og:description" content="2022年8月阅读清单收获淘系前端团队DNS 查询原理详解 - 阮一峰的网络日志异或运算 XOR 教程 - 阮一峰的网络日志How SHA-256 Works Step-by-Step | Bo...">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-09-01T02:18:00.000Z">
+<meta property="article:modified_time" content="2023-06-15T08:48:40.426Z">
+<meta property="article:author" content="caoxicheng">
+<meta name="twitter:card" content="summary">
+  
+  
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">靓仔的窝点</div><div class="sub cap">普信版</div></a></div>
+
+<nav class="menu dis-select"></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">2022年8月阅读清单</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%B6%E8%8E%B7"><span class="toc-text">收获</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%B2%E8%B0%88"><span class="toc-text">闲谈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%AF%E6%B7%A1"><span class="toc-text">扯淡</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div><div id="post-meta">发布于&nbsp;<time datetime="2022-09-01T02:18:00.000Z">2022-09-01</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>2022年8月阅读清单</span></h1>
+<p>2022年8月阅读清单收获淘系前端团队DNS 查询原理详解 - 阮一峰的网络日志异或运算 XOR 教程 - 阮一峰的网络日志How SHA-256 Works Step-by-Step | Bo…</p>
+<!-- more -->
+<h1 id="2022年8月阅读清单"><a href="#2022年8月阅读清单" class="headerlink" title="2022年8月阅读清单"></a>2022年8月阅读清单</h1><h2 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://fed.taobao.org/blog/taofed/do71ct/uihagy/">淘系前端团队</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2022/08/dns-query.html">DNS 查询原理详解 - 阮一峰的网络日志</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2021/01/_xor.html">异或运算 XOR 教程 - 阮一峰的网络日志</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.boot.dev/cryptography/how-sha-2-works-step-by-step-sha-256/">How SHA-256 Works Step-by-Step | Boot.dev</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.joshwcomeau.com/javascript/terminal-for-js-devs/">The Front-End Developer’s Guide to the Terminal</a></li>
+<li><a target="_blank" rel="noopener" href="https://lambdaisland.com/blog/2022-02-17-the-fg-command">https://lambdaisland.com/blog/2022-02-17-the-fg-command</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/semlinker/angular2-ionic2/issues/9">Angular 2 Decorators(装饰器) - part 1 · Issue #9 · semlinker&#x2F;angular2-ionic2 · GitHub</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.sohu.com/a/576060273_358836">雷军2022年度最新演讲：熬过绝望低谷，你便无人能敌_盘古_金山_公司</a></li>
+<li><a target="_blank" rel="noopener" href="https://threadreaderapp.com/thread/1554667451203276801.html">Thread by @coolXiao on Thread Reader App – Thread Reader App</a></li>
+<li><a target="_blank" rel="noopener" href="https://twitter.com/realTomaszKula/status/1559258801261404166?cxt=HBwWjICzocrnzKMrAAAA&cn=ZmxleGlibGVfcmVjcw==&refsrc=email">数据流是否需要在ngOnInit中初始化</a></li>
+<li><a target="_blank" rel="noopener" href="https://staysaasy.com/leadership/2022/08/15/how-to-break-into-senior-management.html">How to Be a Senior Leader | Stay SaaSy</a></li>
+<li><a target="_blank" rel="noopener" href="https://staysaasy.com/management/2020/09/18/management-scrutiny.html">Management Scrutiny | Stay SaaSy</a></li>
+<li><a target="_blank" rel="noopener" href="https://twitter.com/realTomaszKula/status/1561611060016287744?cxt=HBwWgMC82Ye_-qsrAAAA&cn=ZmxleGlibGVfcmVjcw==&refsrc=email">::ng-deep 的替代方法之css变量</a></li>
+<li><a target="_blank" rel="noopener" href="https://staysaasy.com/leadership/2022/08/28/how-to-give-bad-news.html">如何说出坏消息</a></li>
+<li><a target="_blank" rel="noopener" href="https://staysaasy.com/management/2022/07/19/small-performance-cues.html">Small Performance Cues | Stay SaaSy</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.yuque.com/miaomiaomi/rpc2vz/dtr4i6">npm 如何处理依赖与依赖冲突 · 语雀</a></li>
+</ul>
+<h2 id="闲谈"><a href="#闲谈" class="headerlink" title="闲谈"></a>闲谈</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://docs.volta.sh/guide/understanding">Understanding Volta | Volta</a></li>
+<li><a target="_blank" rel="noopener" href="https://medium.com/generic-ui/the-new-way-of-subscribing-in-an-angular-component-f74ef79a8ffc">https://medium.com/generic-ui/the-new-way-of-subscribing-in-an-angular-component-f74ef79a8ffc</a></li>
+<li><a target="_blank" rel="noopener" href="https://sergeygultyayev.medium.com/how-to-make-angular-applications-more-robust-855deec98fbc">https://sergeygultyayev.medium.com/how-to-make-angular-applications-more-robust-855deec98fbc</a></li>
+<li><a target="_blank" rel="noopener" href="https://javascript.plainenglish.io/angular-interceptors-a-complete-guide-7294e2317ecf">https://javascript.plainenglish.io/angular-interceptors-a-complete-guide-7294e2317ecf</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2022/07/weekly-issue-212.html">科技爱好者周刊（第 212 期）：人生不短 - 阮一峰的网络日志</a></li>
+<li><a target="_blank" rel="noopener" href="https://staysaasy.com/startups/2022/04/03/performance-management.html">The Most Important Performance Management Rule For Software Engineers | Stay SaaSy</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.sequential.dev/posts/be-less-technical/">Be less technical</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.1024nav.com/front-news/rush-is-furture">https://www.1024nav.com/front-news/rush-is-furture</a></li>
+<li><a target="_blank" rel="noopener" href="https://voussoir.net/writing/browser_in_the_dark">Browser in the Dark: flashlights with CSS and canvas</a></li>
+<li><a target="_blank" rel="noopener" href="https://gitexplorer.com/">https://gitexplorer.com/</a></li>
+<li><a target="_blank" rel="noopener" href="https://xuanwo.io/reports/2022-30/">2022-30: 如何维护一个开源项目</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2022/08/weekly-issue-218.html">科技爱好者周刊（第 218 期）：葡萄酒，樱花，全球变暖 - 阮一峰的网络日志</a></li>
+<li><a target="_blank" rel="noopener" href="https://staysaasy.com/product/2022/03/23/expanding-saas-business.html">Ways to Expand Your SaaS Business | Stay SaaSy</a></li>
+<li><a target="_blank" rel="noopener" href="https://sergeygultyayev.medium.com/design-better-angular-components-2b89d27b262d">设计更好的 Angular 组件</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/book/7127092198096502822/section/7125705644497174563">徐辛承：快手增长团队的前端工程化思考</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2013/01/javascript_source_map.html">JavaScript Source Map 详解 - 阮一峰的网络日志</a></li>
+<li><a target="_blank" rel="noopener" href="https://nartc.me/blog/a-closer-look-shared-module/">A closer look at SharedModule| Chau Tran</a></li>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000039800522">你不知道的 import type</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/7136864563172999176">toLocaleString 也太好用了吧！ - 掘金</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/7136057532246097928">面试官：说说哪些浏览器事件不会冒泡 - 掘金</a></li>
+</ul>
+<h2 id="扯淡"><a href="#扯淡" class="headerlink" title="扯淡"></a>扯淡</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/7066951709678895141">浅谈：为啥vue和react都选择了Hooks🏂？ - 掘金</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2022/06/endianness-analysis.html">字节序探析：大端与小端的比较 - 阮一峰的网络日志</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2019/11/fault-tolerance.html">容错，高可用和灾备 - 阮一峰的网络日志</a></li>
+<li><a target="_blank" rel="noopener" href="https://staysaasy.com/lifestyle/2021/12/10/debugging-my-work-health.html">Debugging My Work Health | Stay SaaSy</a></li>
+<li><a target="_blank" rel="noopener" href="https://josephg.com/blog/crdts-are-the-future/">I was wrong. CRDTs are the future</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=CcQYj4V2IKw">RxAngular State, The Component Reactive Store | Marmicode Tasting Session #1 - YouTube</a></li>
+<li><a target="_blank" rel="noopener" href="https://levelup.gitconnected.com/improving-angular-initial-load-time-fba8b1289c48">改善角度初始加载时间</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2022/08/weekly-issue-219.html">科技爱好者周刊（第 219 期）：如何防止帐号被黑 - 阮一峰的网络日志</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/7004658172409430029">ReScript 与 TypeScript，谁是前端圈的“当红辣子鸡” - 掘金</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/7135767618790621192">网易严选多端组件库OSSA正式开源 - 掘金</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/7136832425807577124">TypeScript Monorepo 最佳实践 - 掘金</a></li>
+</ul>
+
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2022/09/30/2022%E5%B9%B49%E6%9C%88%E9%98%85%E8%AF%BB%E6%B8%85%E5%8D%95/">2022年9月阅读清单</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2022/08/18/%E5%88%9B%E5%BB%BA%E5%89%8D%E7%AB%AFPNPM%E8%87%AA%E5%AE%9A%E4%B9%89Docker%E9%95%9C%E5%83%8F%E5%B9%B6%E4%B8%8A%E4%BC%A0%E8%87%B3%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BD%BF%E7%94%A8/">创建前端PNPM自定义Docker镜像并上传至服务器使用</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.19.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

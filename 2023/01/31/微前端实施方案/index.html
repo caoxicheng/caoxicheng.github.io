@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>微前端实施方案 - 靓仔的窝点</title>
+
+  
+    <meta name="description" content="介绍微前端微前端的概念是由 ThoughtWorks 在2016年提出的，它借鉴了微服务的架构理念，核心在于将一个庞大的前端应用拆分成多个独立灵活的小型应用，每个应用都可以独立开发、独立运行、独...">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微前端实施方案">
+<meta property="og:url" content="https://caoxicheng.github.io/2023/01/31/%E5%BE%AE%E5%89%8D%E7%AB%AF%E5%AE%9E%E6%96%BD%E6%96%B9%E6%A1%88/index.html">
+<meta property="og:site_name" content="靓仔的窝点">
+<meta property="og:description" content="介绍微前端微前端的概念是由 ThoughtWorks 在2016年提出的，它借鉴了微服务的架构理念，核心在于将一个庞大的前端应用拆分成多个独立灵活的小型应用，每个应用都可以独立开发、独立运行、独...">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.godlike.top/usr/uploads/2023/01/1884718512.png">
+<meta property="article:published_time" content="2023-01-31T07:56:00.000Z">
+<meta property="article:modified_time" content="2023-06-15T08:48:40.417Z">
+<meta property="article:author" content="caoxicheng">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.godlike.top/usr/uploads/2023/01/1884718512.png">
+  
+  
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">靓仔的窝点</div><div class="sub cap">普信版</div></a></div>
+
+<nav class="menu dis-select"></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">微前端实施方案</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-text">介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%AE%E5%89%8D%E7%AB%AF"><span class="toc-text">微前端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6"><span class="toc-text">开源框架</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AF%94%E8%BE%83"><span class="toc-text">比较</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Garfish"><span class="toc-text">Garfish</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#micro-app"><span class="toc-text">micro-app</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E6%93%8D"><span class="toc-text">实操</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E5%BA%94%E7%94%A8-%E9%A2%84%E7%AE%97planning%E9%A1%B9%E7%9B%AE"><span class="toc-text">主应用(预算planning项目)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96"><span class="toc-text">1、安装依赖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E5%9C%A8%E5%85%A5%E5%8F%A3%E5%A4%84%E5%BC%95%E5%85%A5"><span class="toc-text">2、在入口处引入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E5%A2%9E%E5%8A%A0%E5%AF%B9WebComponent%E7%9A%84%E6%94%AF%E6%8C%81"><span class="toc-text">3、增加对WebComponent的支持</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E5%88%86%E9%85%8D%E8%B7%AF%E7%94%B1%E7%BB%99%E5%AD%90%E5%BA%94%E7%94%A8"><span class="toc-text">4、分配路由给子应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81%E5%9C%A8%E9%A1%B5%E9%9D%A2%E4%B8%AD%E5%B5%8C%E5%85%A5%E5%AD%90%E5%BA%94%E7%94%A8"><span class="toc-text">5、在页面中嵌入子应用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%90%E5%BA%94%E7%94%A8"><span class="toc-text">子应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Angular"><span class="toc-text">Angular</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E5%85%B3%E9%97%AD%E7%83%AD%E6%9B%B4%E6%96%B0"><span class="toc-text">1、关闭热更新</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E8%AE%BE%E7%BD%AE%E5%9F%BA%E7%A1%80%E8%B7%AF%E7%94%B1-%E5%A6%82%E6%9E%9C%E5%9F%BA%E5%BA%A7%E6%98%AFhistory%E8%B7%AF%E7%94%B1%EF%BC%8C%E5%AD%90%E5%BA%94%E7%94%A8%E6%98%AFhash%E8%B7%AF%E7%94%B1%EF%BC%8C%E8%BF%99%E4%B8%80%E6%AD%A5%E5%8F%AF%E4%BB%A5%E7%9C%81%E7%95%A5"><span class="toc-text">2、设置基础路由(如果基座是history路由，子应用是hash路由，这一步可以省略)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81%E8%AE%BE%E7%BD%AEpublicPath"><span class="toc-text">3、设置publicPath</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4%E3%80%81%E7%9B%91%E5%90%AC%E5%8D%B8%E8%BD%BD"><span class="toc-text">4、监听卸载</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#React"><span class="toc-text">React</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E8%AE%BE%E7%BD%AE%E5%9F%BA%E7%A1%80%E8%B7%AF%E7%94%B1-%E5%A6%82%E6%9E%9C%E5%9F%BA%E5%BA%A7%E6%98%AFhistory%E8%B7%AF%E7%94%B1%EF%BC%8C%E5%AD%90%E5%BA%94%E7%94%A8%E6%98%AFhash%E8%B7%AF%E7%94%B1%EF%BC%8C%E8%BF%99%E4%B8%80%E6%AD%A5%E5%8F%AF%E4%BB%A5%E7%9C%81%E7%95%A5"><span class="toc-text">1、设置基础路由(如果基座是history路由，子应用是hash路由，这一步可以省略)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E8%AE%BE%E7%BD%AEpublicPath"><span class="toc-text">2、设置publicPath</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81%E7%9B%91%E5%90%AC%E5%8D%B8%E8%BD%BD"><span class="toc-text">3、监听卸载</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Vue"><span class="toc-text">Vue</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E8%AE%BE%E7%BD%AE%E8%B7%A8%E5%9F%9F%E6%94%AF%E6%8C%81"><span class="toc-text">1、设置跨域支持</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E8%AE%BE%E7%BD%AE%E5%9F%BA%E7%A1%80%E8%B7%AF%E7%94%B1-%E5%A6%82%E6%9E%9C%E5%9F%BA%E5%BA%A7%E6%98%AFhistory%E8%B7%AF%E7%94%B1%EF%BC%8C%E5%AD%90%E5%BA%94%E7%94%A8%E6%98%AFhash%E8%B7%AF%E7%94%B1%EF%BC%8C%E8%BF%99%E4%B8%80%E6%AD%A5%E5%8F%AF%E4%BB%A5%E7%9C%81%E7%95%A5-1"><span class="toc-text">2、设置基础路由(如果基座是history路由，子应用是hash路由，这一步可以省略)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81%E8%AE%BE%E7%BD%AEpublicPath-1"><span class="toc-text">3、设置publicPath</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4%E3%80%81%E7%9B%91%E5%90%AC%E5%8D%B8%E8%BD%BD-1"><span class="toc-text">4、监听卸载</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1"><span class="toc-text">数据通信</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AD%90%E5%BA%94%E7%94%A8%E8%8E%B7%E5%8F%96%E6%9D%A5%E8%87%AA%E5%9F%BA%E5%BA%A7%E5%BA%94%E7%94%A8%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="toc-text">一、子应用获取来自基座应用的数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AD%90%E5%BA%94%E7%94%A8%E5%90%91%E5%9F%BA%E5%BA%A7%E5%BA%94%E7%94%A8%E5%8F%91%E9%80%81%E6%95%B0%E6%8D%AE"><span class="toc-text">二、子应用向基座应用发送数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%9F%BA%E5%BA%A7%E5%BA%94%E7%94%A8%E5%90%91%E5%AD%90%E5%BA%94%E7%94%A8%E5%8F%91%E9%80%81%E6%95%B0%E6%8D%AE"><span class="toc-text">三、基座应用向子应用发送数据</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F1-%E9%80%9A%E8%BF%87data%E5%B1%9E%E6%80%A7%E5%8F%91%E9%80%81%E6%95%B0%E6%8D%AE"><span class="toc-text">方式1: 通过data属性发送数据</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F2-%E6%89%8B%E5%8A%A8%E5%8F%91%E9%80%81%E6%95%B0%E6%8D%AE"><span class="toc-text">方式2: 手动发送数据</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%9F%BA%E5%BA%A7%E5%BA%94%E7%94%A8%E8%8E%B7%E5%8F%96%E6%9D%A5%E8%87%AA%E5%AD%90%E5%BA%94%E7%94%A8%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="toc-text">四、基座应用获取来自子应用的数据</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F1%EF%BC%9A%E7%9B%B4%E6%8E%A5%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE"><span class="toc-text">方式1：直接获取数据</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F2-%E7%9B%91%E5%90%AC%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6-datachange"><span class="toc-text">方式2: 监听自定义事件 (datachange)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F3-%E7%BB%91%E5%AE%9A%E7%9B%91%E5%90%AC%E5%87%BD%E6%95%B0"><span class="toc-text">方式3: 绑定监听函数</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DEMO"><span class="toc-text">DEMO</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-01-31T07:56:00.000Z">2023-01-31</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>微前端实施方案</span></h1>
+<p>介绍微前端微前端的概念是由 ThoughtWorks 在2016年提出的，它借鉴了微服务的架构理念，核心在于将一个庞大的前端应用拆分成多个独立灵活的小型应用，每个应用都可以独立开发、独立运行、独…</p>
+<!-- more -->
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><h3 id="微前端"><a href="#微前端" class="headerlink" title="微前端"></a>微前端</h3><p>微前端的概念是由 ThoughtWorks 在2016年提出的，它借鉴了微服务的架构理念，核心在于将一个庞大的前端应用拆分成多个独立灵活的小型应用，每个应用都可以独立开发、独立运行、独立部署，再将这些小型应用融合为一个完整的应用，或者将原本运行已久、没有关联的几个应用融合为一个应用。微前端既可以将多个项目融合为一，又可以减少项目之间的耦合，提升项目扩展性，相比一整块的前端仓库，微前端架构下的前端仓库倾向于更小更灵活。</p>
+<p>它主要解决了两个问题：</p>
+<ul>
+<li>1、随着项目迭代应用越来越庞大，难以维护。</li>
+<li>2、跨团队或跨部门协作开发项目导致效率低下的问题。</li>
+</ul>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://www.godlike.top/usr/uploads/2023/01/1884718512.png" alt="image.png image.png"/></div><div class="image-meta"><span class="image-caption center">image.png image.png</span></div></div>
+
+<h3 id="开源框架"><a href="#开源框架" class="headerlink" title="开源框架"></a>开源框架</h3><p>字节跳动: <a target="_blank" rel="noopener" href="https://www.garfishjs.org/">Garfish</a></p>
+<p>京东: <a target="_blank" rel="noopener" href="https://zeroing.jd.com/micro-app/">micro-app</a></p>
+<p>蚂蚁金服: <a target="_blank" rel="noopener" href="https://qiankun.umijs.org/">qiankun</a> (qiankun是基于 <a target="_blank" rel="noopener" href="https://github.com/single-spa/single-spa">single-spa</a> 的一层封装)</p>
+<h2 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h2><h3 id="Garfish"><a href="#Garfish" class="headerlink" title="Garfish"></a>Garfish</h3><p>优势</p>
+<ul>
+<li>自实现</li>
+<li>提供缓存</li>
+<li>沙盒功能</li>
+</ul>
+<p>劣势</p>
+<ul>
+<li>需要配置的配置项较多</li>
+<li>基座应用必须为react</li>
+<li>懒加载、刷新有时有奇怪的问题</li>
+<li>不支持嵌套(子应用不能既是主又是子)</li>
+</ul>
+<h3 id="micro-app"><a href="#micro-app" class="headerlink" title="micro-app"></a>micro-app</h3><p>优势</p>
+<ul>
+<li>基于webComponent技术</li>
+<li>嵌入无需新增依赖</li>
+<li>应用无限制</li>
+<li>沙盒功能</li>
+<li>预加载</li>
+</ul>
+<p>劣势</p>
+<ul>
+<li>静态资源有时会有问题</li>
+<li>angular子应用无法使用懒加载</li>
+<li>不支持嵌套(子应用不能既是主又是子)</li>
+</ul>
+<blockquote>
+<p>鉴于实际上手难度以及使用场景我们决定基于micro-app来实现我们的微前端方案</p>
+</blockquote>
+<h2 id="实操"><a href="#实操" class="headerlink" title="实操"></a>实操</h2><h3 id="主应用-预算planning项目"><a href="#主应用-预算planning项目" class="headerlink" title="主应用(预算planning项目)"></a>主应用(预算planning项目)</h3><h4 id="1、安装依赖"><a href="#1、安装依赖" class="headerlink" title="1、安装依赖"></a>1、安装依赖</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i @micro-zoe/micro-app --save</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、在入口处引入"><a href="#2、在入口处引入" class="headerlink" title="2、在入口处引入"></a>2、在入口处引入</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">// index.js</span><br><span class="line">import microApp from &#x27;@micro-zoe/micro-app&#x27;</span><br><span class="line">microApp.start()</span><br><span class="line"></span><br><span class="line">// 实际代码(main.js)</span><br><span class="line"></span><br><span class="line">import &#123; enableProdMode &#125; from &#x27;@angular/core&#x27;;</span><br><span class="line">import &#123; platformBrowserDynamic &#125; from &#x27;@angular/platform-browser-dynamic&#x27;;</span><br><span class="line">import &#123; AppModule &#125; from &#x27;./app/app.module&#x27;;</span><br><span class="line">import &#123; environment &#125; from &#x27;./environments/environment&#x27;;</span><br><span class="line">// entry</span><br><span class="line">import microApp from &#x27;@micro-zoe/micro-app&#x27;</span><br><span class="line">microApp.start()</span><br><span class="line">if (environment.production) &#123;</span><br><span class="line"> enableProdMode();</span><br><span class="line">&#125;</span><br><span class="line">platformBrowserDynamic().bootstrapModule(AppModule)</span><br><span class="line"> .catch((err) =&gt; console.error(err));</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、增加对WebComponent的支持"><a href="#3、增加对WebComponent的支持" class="headerlink" title="3、增加对WebComponent的支持"></a>3、增加对WebComponent的支持</h4><p>在<code>app/app.module.ts</code>中添加<code>CUSTOM_ELEMENTS_SCHEMA</code>到<code>@NgModule.schemas</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// app/app.module.ts</span><br><span class="line">import &#123; NgModule, CUSTOM_ELEMENTS_SCHEMA &#125; from &#x27;@angular/core&#x27;;</span><br><span class="line">@NgModule(&#123;</span><br><span class="line"> schemas: [CUSTOM_ELEMENTS_SCHEMA],</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="4、分配路由给子应用"><a href="#4、分配路由给子应用" class="headerlink" title="4、分配路由给子应用"></a>4、分配路由给子应用</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">// app/app-routing.module.ts</span><br><span class="line">import &#123; NgModule &#125; from &#x27;@angular/core&#x27;;</span><br><span class="line">import &#123; RouterModule, Routes &#125; from &#x27;@angular/router&#x27;;</span><br><span class="line">import &#123; MyAngularComponent &#125; from &quot;./my-angular/my-angular.component&quot;;</span><br><span class="line">import &#123; MyReactComponent &#125; from &quot;./my-react/my-react.component&quot;;</span><br><span class="line">import &#123; MyVueComponent &#125; from &quot;./my-vue/my-vue.component&quot;;</span><br><span class="line">const routes: Routes = [</span><br><span class="line"> &#123;</span><br><span class="line">     // 👇 非严格匹配，/examples/angular/* 都指向 my-angular 页面</span><br><span class="line">     path: &#x27;examples/angular&#x27;,</span><br><span class="line">     children: [&#123;</span><br><span class="line">     path: &#x27;**&#x27;,</span><br><span class="line">     component: MyAngular</span><br><span class="line">     &#125;]</span><br><span class="line"> &#125;,</span><br><span class="line"> &#123;</span><br><span class="line">     path: &#x27;examples/react&#x27;,</span><br><span class="line">     children: [&#123;</span><br><span class="line">     path: &#x27;**&#x27;,</span><br><span class="line">     component: MyReactComponent</span><br><span class="line">     &#125;]</span><br><span class="line"> &#125;,</span><br><span class="line"> &#123;</span><br><span class="line">     path: &#x27;examples/vue&#x27;,</span><br><span class="line">     children: [&#123;</span><br><span class="line">     path: &#x27;**&#x27;,</span><br><span class="line">     component: MyVueComponent</span><br><span class="line">     &#125;]</span><br><span class="line"> &#125;,</span><br><span class="line">];</span><br><span class="line">@NgModule(&#123;</span><br><span class="line"> imports: [RouterModule.forRoot(routes)],</span><br><span class="line"> exports: [RouterModule],</span><br><span class="line">&#125;)</span><br><span class="line">export class AppRoutingModule &#123; &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="5、在页面中嵌入子应用"><a href="#5、在页面中嵌入子应用" class="headerlink" title="5、在页面中嵌入子应用"></a>5、在页面中嵌入子应用</h4><!-- app/my-angular/my-angular.component.html -->
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;micro-app disableScopecss name=&#x27;app-angular&#x27; url=&#x27;http://localhost:3000/&#x27; baseroute=&#x27;/examples/angular&#x27;&gt;&lt;/micro-app&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- app/my-vue/my-vue.component.html --&gt;</span><br><span class="line"></span><br><span class="line">&lt;micro-app disableScopecss name=&#x27;app-vue&#x27; url=&#x27;http://localhost:8080/&#x27; baseroute=&#x27;/examples/vue&#x27;&gt;&lt;/micro-app&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- app/my-react/my-react.component.html --&gt;</span><br><span class="line"></span><br><span class="line">&lt;micro-app disableScopecss name=&#x27;app-react&#x27; url=&#x27;http://localhost:3001/&#x27; baseroute=&#x27;/examples/react&#x27;&gt;&lt;/micro-app&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="子应用"><a href="#子应用" class="headerlink" title="子应用"></a>子应用</h3><h4 id="Angular"><a href="#Angular" class="headerlink" title="Angular"></a>Angular</h4><h5 id="1、关闭热更新"><a href="#1、关闭热更新" class="headerlink" title="1、关闭热更新"></a>1、关闭热更新</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line"> &quot;start&quot;: &quot;ng serve --live-reload false&quot;,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<h5 id="2、设置基础路由-如果基座是history路由，子应用是hash路由，这一步可以省略"><a href="#2、设置基础路由-如果基座是history路由，子应用是hash路由，这一步可以省略" class="headerlink" title="2、设置基础路由(如果基座是history路由，子应用是hash路由，这一步可以省略)"></a>2、设置基础路由(如果基座是history路由，子应用是hash路由，这一步可以省略)</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">// app/app-routing.module.ts</span><br><span class="line">import &#123; NgModule &#125; from &#x27;@angular/core&#x27;;</span><br><span class="line">import &#123; RouterModule, Routes &#125; from &#x27;@angular/router&#x27;;</span><br><span class="line">import &#123; APP_BASE_HREF &#125; from &#x27;@angular/common&#x27;;</span><br><span class="line">const routes: Routes = [...];</span><br><span class="line"></span><br><span class="line">@NgModule(&#123;</span><br><span class="line"> imports: [RouterModule.forRoot(routes)],</span><br><span class="line"> exports: [RouterModule],</span><br><span class="line"> // 👇 设置基础路由</span><br><span class="line"> providers: [&#123;</span><br><span class="line"> provide: APP_BASE_HREF,</span><br><span class="line">     // angular子应用实测需要此中方式获取路径,可能是文档更新不齐全</span><br><span class="line">     // @ts-ignore __MICRO_APP_BASE_ROUTE__ 为micro-app传入的基础路由</span><br><span class="line">     useValue: (window[&quot;__MICRO_APP_PROXY_WINDOW__&quot;] &amp;&amp; window[&quot;__MICRO_APP_PROXY_WINDOW__&quot;][&quot;__MICRO_APP_BASE_ROUTE__&quot;]) || &#x27;/&#x27;,</span><br><span class="line"> &#125;]</span><br><span class="line">&#125;)</span><br><span class="line">export class AppRoutingModule &#123; &#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="3、设置publicPath"><a href="#3、设置publicPath" class="headerlink" title="3、设置publicPath"></a>3、设置publicPath</h5><p><strong>步骤1:</strong> 在子应用src目录下创建名称为public-path.js的文件，并添加如下内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// __MICRO_APP_ENVIRONMENT__和__MICRO_APP_PUBLIC_PATH__是由micro-app注入的全局变量</span><br><span class="line">if (window[&quot;__MICRO_APP_PROXY_WINDOW__&quot;] &amp;&amp; window[&quot;__MICRO_APP_PROXY_WINDOW__&quot;][&quot;__MICRO_APP_ENVIRONMENT__&quot;]) &#123;</span><br><span class="line"> // eslint-disable-next-line</span><br><span class="line"> __webpack_public_path__ = window[&quot;__MICRO_APP_PROXY_WINDOW__&quot;][&quot;__MICRO_APP_PUBLIC_PATH__&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>步骤2:</strong> 在子应用入口文件的最顶部引入public-path.js</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// entry</span><br><span class="line">import &#x27;./public-path&#x27;</span><br></pre></td></tr></table></figure>
+
+<h5 id="4、监听卸载"><a href="#4、监听卸载" class="headerlink" title="4、监听卸载"></a>4、监听卸载</h5><p>子应用被卸载时会接受到一个名为unmount的事件，在此可以进行卸载相关操作。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// main.ts</span><br><span class="line">let app = null;</span><br><span class="line">platformBrowserDynamic()</span><br><span class="line"> .bootstrapModule(AppModule)</span><br><span class="line"> .then((res: NgModuleRef&lt;AppModule&gt;) =&gt; &#123;</span><br><span class="line">     app = res</span><br><span class="line"> &#125;)</span><br><span class="line">// 监听卸载操作</span><br><span class="line">window.addEventListener(&#x27;unmount&#x27;, function () &#123;</span><br><span class="line"> app.destroy();</span><br><span class="line"> app = null;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="React"><a href="#React" class="headerlink" title="React"></a>React</h4><h5 id="1、设置基础路由-如果基座是history路由，子应用是hash路由，这一步可以省略"><a href="#1、设置基础路由-如果基座是history路由，子应用是hash路由，这一步可以省略" class="headerlink" title="1、设置基础路由(如果基座是history路由，子应用是hash路由，这一步可以省略)"></a>1、设置基础路由(如果基座是history路由，子应用是hash路由，这一步可以省略)</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// router.js</span><br><span class="line">import &#123; BrowserRouter, Switch, Route &#125; from &#x27;react-router-dom&#x27;</span><br><span class="line">export default function AppRoute () &#123;</span><br><span class="line"> return (</span><br><span class="line"> // 👇 设置基础路由，如果没有设置baseroute属性，则window.__MICRO_APP_BASE_ROUTE__为空字符串</span><br><span class="line"> &lt;BrowserRouter basename=&#123;window.__MICRO_APP_BASE_ROUTE__ || &#x27;/&#x27;&#125;&gt; ... &lt;/BrowserRouter&gt;</span><br><span class="line"> )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// index.js</span><br><span class="line">const router = createBrowserRouter([</span><br><span class="line"> &#123;</span><br><span class="line"> path: &#x27;/&#x27;,</span><br><span class="line"> element: &lt;App /&gt;</span><br><span class="line"> &#125;</span><br><span class="line">],</span><br><span class="line"> &#123;</span><br><span class="line"> // @ts-ignore</span><br><span class="line"> basename: (window[&#x27;__MICRO_APP_BASE_ROUTE__&#x27;]) || &#x27;/&#x27;</span><br><span class="line"> &#125;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="2、设置publicPath"><a href="#2、设置publicPath" class="headerlink" title="2、设置publicPath"></a>2、设置publicPath</h5><p><strong>步骤1:</strong> 在子应用src目录下创建名称为public-path.js的文件，并添加如下内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// __MICRO_APP_ENVIRONMENT__和__MICRO_APP_PUBLIC_PATH__是由micro-app注入的全局变量</span><br><span class="line">if (window.__MICRO_APP_ENVIRONMENT__) &#123;</span><br><span class="line"> // eslint-disable-next-line</span><br><span class="line"> __webpack_public_path__ = window.__MICRO_APP_PUBLIC_PATH__</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>步骤2:</strong> 在子应用入口文件的最顶部引入public-path.js</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// entry</span><br><span class="line">import &#x27;./public-path&#x27;</span><br></pre></td></tr></table></figure>
+
+<h5 id="3、监听卸载"><a href="#3、监听卸载" class="headerlink" title="3、监听卸载"></a>3、监听卸载</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">子应用被卸载时会接受到一个名为unmount的事件，在此可以进行卸载相关操作。</span><br><span class="line"></span><br><span class="line">window.addEventListener(&#x27;unmount&#x27;, function () &#123;</span><br><span class="line"> root.unmount() // react 18</span><br><span class="line"> // ReactDOM.unmountComponentAtNode(document.getElementById(&#x27;root&#x27;))</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h4><h5 id="1、设置跨域支持"><a href="#1、设置跨域支持" class="headerlink" title="1、设置跨域支持"></a>1、设置跨域支持</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">在vue.config.js中添加配置</span><br><span class="line"></span><br><span class="line">const &#123; defineConfig &#125; = require(&#x27;@vue/cli-service&#x27;)</span><br><span class="line">module.exports = defineConfig(&#123;</span><br><span class="line"> transpileDependencies: true,</span><br><span class="line"> devServer: &#123;</span><br><span class="line"> headers: &#123;</span><br><span class="line"> &#x27;Access-Control-Allow-Origin&#x27;: &#x27;*&#x27;,</span><br><span class="line"> &#125;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="2、设置基础路由-如果基座是history路由，子应用是hash路由，这一步可以省略-1"><a href="#2、设置基础路由-如果基座是history路由，子应用是hash路由，这一步可以省略-1" class="headerlink" title="2、设置基础路由(如果基座是history路由，子应用是hash路由，这一步可以省略)"></a>2、设置基础路由(如果基座是history路由，子应用是hash路由，这一步可以省略)</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// main.js</span><br><span class="line">import &#123; createRouter, createWebHistory &#125; from &#x27;vue-router&#x27;</span><br><span class="line">import routes from &#x27;./router&#x27;</span><br><span class="line">const router = createRouter(&#123;</span><br><span class="line"> // 👇 __MICRO_APP_BASE_ROUTE__ 为micro-app传入的基础路由</span><br><span class="line"> history: createWebHistory(window.__MICRO_APP_BASE_ROUTE__ || process.env.BASE_URL),</span><br><span class="line"> routes,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="3、设置publicPath-1"><a href="#3、设置publicPath-1" class="headerlink" title="3、设置publicPath"></a>3、设置publicPath</h5><p><strong>步骤1:</strong> 在子应用src目录下创建名称为public-path.js的文件，并添加如下内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// __MICRO_APP_ENVIRONMENT__和__MICRO_APP_PUBLIC_PATH__是由micro-app注入的全局变量</span><br><span class="line">if (window.__MICRO_APP_ENVIRONMENT__) &#123;</span><br><span class="line"> // eslint-disable-next-line</span><br><span class="line"> __webpack_public_path__ = window.__MICRO_APP_PUBLIC_PATH__</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>步骤2:</strong> 在子应用入口文件的最顶部引入public-path.js</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// entry</span><br><span class="line">import &#x27;./public-path&#x27;</span><br></pre></td></tr></table></figure>
+
+<h5 id="4、监听卸载-1"><a href="#4、监听卸载-1" class="headerlink" title="4、监听卸载"></a>4、监听卸载</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">子应用被卸载时会接受到一个名为unmount的事件，在此可以进行卸载相关操作。</span><br><span class="line"></span><br><span class="line">// main.js</span><br><span class="line">const app = createApp(App)</span><br><span class="line">app.mount(&#x27;#app&#x27;)</span><br><span class="line">// 监听卸载操作</span><br><span class="line">window.addEventListener(&#x27;unmount&#x27;, function () &#123;</span><br><span class="line"> app.unmount()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="数据通信"><a href="#数据通信" class="headerlink" title="数据通信"></a>数据通信</h3><h4 id="一、子应用获取来自基座应用的数据"><a href="#一、子应用获取来自基座应用的数据" class="headerlink" title="一、子应用获取来自基座应用的数据"></a>一、子应用获取来自基座应用的数据</h4><p>micro-app会向子应用注入名称为microApp的全局对象，子应用通过这个对象和基座应用进行数据交互。</p>
+<p>有两种方式获取来自基座应用的数据：</p>
+<p><strong>方式1：直接获取数据</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const data = window.microApp.getData() // 返回基座下发的data数据</span><br></pre></td></tr></table></figure>
+
+<p><strong>方式2：绑定监听函数</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function dataListener (data) &#123;</span><br><span class="line"> console.log(&#x27;来自基座应用的数据&#x27;, data)</span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"></span><br><span class="line">- 绑定监听函数，监听函数只有在数据变化时才会触发</span><br><span class="line">- dataListener: 绑定函数</span><br><span class="line">- autoTrigger: 在初次绑定监听函数时如果有缓存数据，是否需要主动触发一次，默认为false</span><br><span class="line">- !!!重要说明: 因为子应用是异步渲染的，而基座发送数据是同步的，</span><br><span class="line">- 如果在子应用渲染结束前基座应用发送数据，则在绑定监听函数前数据已经发送，在初始化后不会触发绑定函数，</span><br><span class="line">- 但这个数据会放入缓存中，此时可以设置autoTrigger为true主动触发一次监听函数来获取数据。</span><br><span class="line">  */</span><br><span class="line">  window.microApp.addDataListener(dataListener: Function, autoTrigger?: boolean)</span><br><span class="line">  // 解绑监听函数</span><br><span class="line">  window.microApp.removeDataListener(dataListener: Function)</span><br><span class="line">  // 清空当前子应用的所有绑定函数(全局数据函数除外)</span><br><span class="line">  window.microApp.clearDataListener()</span><br></pre></td></tr></table></figure>
+
+<h4 id="二、子应用向基座应用发送数据"><a href="#二、子应用向基座应用发送数据" class="headerlink" title="二、子应用向基座应用发送数据"></a>二、子应用向基座应用发送数据</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// dispatch只接受对象作为参数</span><br><span class="line">window.microApp.dispatch(&#123;type: &#x27;子应用发送的数据&#x27;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="三、基座应用向子应用发送数据"><a href="#三、基座应用向子应用发送数据" class="headerlink" title="三、基座应用向子应用发送数据"></a>三、基座应用向子应用发送数据</h4><p>基座应用向子应用发送数据有两种方式：</p>
+<h5 id="方式1-通过data属性发送数据"><a href="#方式1-通过data属性发送数据" class="headerlink" title="方式1: 通过data属性发送数据"></a>方式1: 通过data属性发送数据</h5><h6 id="Vue-Angular类似"><a href="#Vue-Angular类似" class="headerlink" title="Vue(Angular类似)"></a>Vue(Angular类似)</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;micro-app</span><br><span class="line">    name=&#x27;my-app&#x27;</span><br><span class="line">    url=&#x27;xx&#x27;</span><br><span class="line">    :data=&#x27;dataForChild&#x27; // data只接受对象类型，数据变化时会重新发送</span><br><span class="line">  /&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  data () &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      dataForChild: &#123;type: &#x27;发送给子应用的数据&#x27;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h6 id="React-1"><a href="#React-1" class="headerlink" title="React"></a>React</h6><p>在React中我们需要引入一个polyfill。</p>
+<p>在<micro-app>元素所在的文件顶部添加polyfill(注释也要复制)。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/** @jsxRuntime classic */</span><br><span class="line">/** @jsx jsxCustomEvent */</span><br><span class="line">import jsxCustomEvent from &#x27;@micro-zoe/micro-app/polyfill/jsx-custom-event&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><strong>开始使用</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;micro-app</span><br><span class="line"> name=&#x27;my-app&#x27;</span><br><span class="line"> url=&#x27;xx&#x27;</span><br><span class="line"> data=&#123;this.state.dataForChild&#125; // data只接受对象类型，采用严格对比(===)，当传入新的data对象时会重新发送</span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
+
+<h5 id="方式2-手动发送数据"><a href="#方式2-手动发送数据" class="headerlink" title="方式2: 手动发送数据"></a>方式2: 手动发送数据</h5><p>手动发送数据需要通过name指定接受数据的子应用，此值和<micro-app>元素中的name一致。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import microApp from &#x27;@micro-zoe/micro-app&#x27;</span><br><span class="line">// 发送数据给子应用 my-app，setData第二个参数只接受对象类型</span><br><span class="line">microApp.setData(&#x27;my-app&#x27;, &#123;type: &#x27;新的数据&#x27;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="四、基座应用获取来自子应用的数据"><a href="#四、基座应用获取来自子应用的数据" class="headerlink" title="四、基座应用获取来自子应用的数据"></a>四、基座应用获取来自子应用的数据</h4><p>基座应用获取来自子应用的数据有三种方式：</p>
+<h5 id="方式1：直接获取数据"><a href="#方式1：直接获取数据" class="headerlink" title="方式1：直接获取数据"></a>方式1：直接获取数据</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import microApp from &#x27;@micro-zoe/micro-app&#x27;</span><br><span class="line">const childData = microApp.getData(appName) // 返回子应用的data数据</span><br></pre></td></tr></table></figure>
+
+<h5 id="方式2-监听自定义事件-datachange"><a href="#方式2-监听自定义事件-datachange" class="headerlink" title="方式2: 监听自定义事件 (datachange)"></a>方式2: 监听自定义事件 (datachange)</h5><h6 id="Vue-Angular同理"><a href="#Vue-Angular同理" class="headerlink" title="Vue(Angular同理)"></a>Vue(Angular同理)</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;micro-app</span><br><span class="line">    name=&#x27;my-app&#x27;</span><br><span class="line">    url=&#x27;xx&#x27;</span><br><span class="line">    // 数据在事件对象的detail.data字段中，子应用每次发送数据都会触发datachange</span><br><span class="line">    @datachange=&#x27;handleDataChange&#x27;</span><br><span class="line">  /&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  methods: &#123;</span><br><span class="line">    handleDataChange (e) &#123;</span><br><span class="line">      console.log(&#x27;来自子应用的数据：&#x27;, e.detail.data)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h6 id="React-2"><a href="#React-2" class="headerlink" title="React"></a>React</h6><p>在React中我们需要引入一个polyfill。</p>
+<p>在<micro-app>元素所在的文件顶部添加polyfill(注释也要复制)。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/** @jsxRuntime classic */</span><br><span class="line">/** @jsx jsxCustomEvent */</span><br><span class="line">import jsxCustomEvent from &#x27;@micro-zoe/micro-app/polyfill/jsx-custom-event&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><strong>开始使用</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;micro-app</span><br><span class="line"> name=&#x27;my-app&#x27;</span><br><span class="line"> url=&#x27;xx&#x27;</span><br><span class="line"> // 数据在event.detail.data字段中，子应用每次发送数据都会触发datachange</span><br><span class="line"> onDataChange=&#123;(e) =&gt; console.log(&#x27;来自子应用的数据：&#x27;, e.detail.data)&#125;</span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
+
+<h5 id="方式3-绑定监听函数"><a href="#方式3-绑定监听函数" class="headerlink" title="方式3: 绑定监听函数"></a>方式3: 绑定监听函数</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">绑定监听函数需要通过name指定子应用，此值和&lt;micro-app&gt;元素中的name一致。</span><br><span class="line"></span><br><span class="line">import microApp from &#x27;@micro-zoe/micro-app&#x27;</span><br><span class="line">function dataListener (data) &#123;</span><br><span class="line"> console.log(&#x27;来自子应用my-app的数据&#x27;, data)</span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"></span><br><span class="line">- 绑定监听函数</span><br><span class="line">- appName: 应用名称</span><br><span class="line">- dataListener: 绑定函数</span><br><span class="line">- autoTrigger: 在初次绑定监听函数时如果有缓存数据，是否需要主动触发一次，默认为false</span><br><span class="line">  */</span><br><span class="line">  microApp.addDataListener(appName: string, dataListener: Function, autoTrigger?: boolean)</span><br><span class="line">  // 解绑监听my-app子应用的函数</span><br><span class="line">  microApp.removeDataListener(appName: string, dataListener: Function)</span><br><span class="line">  // 清空所有监听appName子应用的函数</span><br><span class="line">  microApp.clearDataListener(appName: string)</span><br></pre></td></tr></table></figure>
+
+<h2 id="DEMO"><a href="#DEMO" class="headerlink" title="DEMO"></a>DEMO</h2><blockquote>
+<p>依赖版本: “@micro-zoe&#x2F;micro-app”: “^0.8.10”</p>
+</blockquote>
+<blockquote>
+<p>内部项目就不展示了</p>
+</blockquote>
+<p>Angular主应用(预算)</p>
+<p>React子应用</p>
+<p>Vue子应用</p>
+<p>Angular子应用</p>
+
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/02/22/2022%E5%B9%B411%E6%9C%88%E9%98%85%E8%AF%BB%E5%88%97%E8%A1%A8/">2022年11月阅读列表</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2022/11/01/2022%E5%B9%B410%E6%9C%88%E9%98%85%E8%AF%BB%E5%88%97%E8%A1%A8/">2022年10月阅读列表</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.19.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

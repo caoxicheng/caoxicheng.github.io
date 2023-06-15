@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Git  flow 介绍以及使用 - 靓仔的窝点</title>
+
+  
+    <meta name="description" content="[scode type&#x3D;”blue”]协作必须有一个规范的工作流程，让大家有效地合作，使得项目井井有条地发展下去。”工作流程”在英语里，叫做”workflow”或者”flow”，原意是水流，比喻项目像水流那样，顺畅、自然地向前流动，不会发生冲击、对撞、甚至漩涡。[&#x2F;scode] 功能驱动需求是开发的起点，先有需求再有功能分支（feature branch）或者补丁分支（hotf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git  flow 介绍以及使用">
+<meta property="og:url" content="https://caoxicheng.github.io/2021/05/21/Git-flow-%E4%BB%8B%E7%BB%8D%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="靓仔的窝点">
+<meta property="og:description" content="[scode type&#x3D;”blue”]协作必须有一个规范的工作流程，让大家有效地合作，使得项目井井有条地发展下去。”工作流程”在英语里，叫做”workflow”或者”flow”，原意是水流，比喻项目像水流那样，顺畅、自然地向前流动，不会发生冲击、对撞、甚至漩涡。[&#x2F;scode] 功能驱动需求是开发的起点，先有需求再有功能分支（feature branch）或者补丁分支（hotf">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://caoxicheng.github.io/2021/05/21/Git-flow-%E4%BB%8B%E7%BB%8D%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8/3433355365.png">
+<meta property="og:image" content="https://caoxicheng.github.io/2021/05/21/Git-flow-%E4%BB%8B%E7%BB%8D%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8/796022722.png">
+<meta property="og:image" content="https://caoxicheng.github.io/2021/05/21/Git-flow-%E4%BB%8B%E7%BB%8D%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8/1548306296.png">
+<meta property="og:image" content="https://caoxicheng.github.io/2021/05/21/Git-flow-%E4%BB%8B%E7%BB%8D%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8/3204105017.png">
+<meta property="og:image" content="https://caoxicheng.github.io/2021/05/21/Git-flow-%E4%BB%8B%E7%BB%8D%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8/2452821589.png">
+<meta property="og:image" content="https://caoxicheng.github.io/2021/05/21/Git-flow-%E4%BB%8B%E7%BB%8D%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8/1165045328.png">
+<meta property="og:image" content="https://caoxicheng.github.io/2021/05/21/Git-flow-%E4%BB%8B%E7%BB%8D%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8/1146745782.png">
+<meta property="og:image" content="https://caoxicheng.github.io/2021/05/21/Git-flow-%E4%BB%8B%E7%BB%8D%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8/2483612891.png">
+<meta property="og:image" content="https://caoxicheng.github.io/2021/05/21/Git-flow-%E4%BB%8B%E7%BB%8D%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8/3671600544.png">
+<meta property="og:image" content="https://caoxicheng.github.io/2021/05/21/Git-flow-%E4%BB%8B%E7%BB%8D%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8/3403517407.png">
+<meta property="article:published_time" content="2021-05-21T07:18:00.000Z">
+<meta property="article:modified_time" content="2023-06-15T15:44:34.335Z">
+<meta property="article:author" content="caoxicheng">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://caoxicheng.github.io/2021/05/21/Git-flow-%E4%BB%8B%E7%BB%8D%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8/3433355365.png">
+  
+  
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">靓仔的窝点</div><div class="sub cap">普信版</div></a></div>
+
+<nav class="menu dis-select"></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Git  flow 介绍以及使用</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E9%A9%B1%E5%8A%A8"><span class="toc-text">功能驱动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-flow"><span class="toc-text">Git flow</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-Git-flow"><span class="toc-text">安装 Git flow</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-text">使用-初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%94%AF%E6%A8%A1%E5%BC%8F"><span class="toc-text">分支模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E5%BC%80%E5%8F%91"><span class="toc-text">功能开发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B%E6%96%B0%E5%8A%9F%E8%83%BD"><span class="toc-text">开始新功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%8C%E6%88%90%E4%B8%80%E4%B8%AA%E5%8A%9F%E8%83%BD"><span class="toc-text">完成一个功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%A1%E7%90%86-release"><span class="toc-text">管理 release</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA-release"><span class="toc-text">创建 release</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%8C%E6%88%90-release"><span class="toc-text">完成 release</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hotfix"><span class="toc-text">hotfix</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BAHotfixes"><span class="toc-text">创建Hotfixes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%8C%E6%88%90-Hotfixes"><span class="toc-text">完成 Hotfixes</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9E%E9%A1%BE%E6%80%BB%E7%BB%93"><span class="toc-text">回顾总结</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div><div id="post-meta">发布于&nbsp;<time datetime="2021-05-21T07:18:00.000Z">2021-05-21</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Git  flow 介绍以及使用</span></h1>
+<p>[scode type&#x3D;”blue”]协作必须有一个规范的工作流程，让大家有效地合作，使得项目井井有条地发展下去。”工作流程”在英语里，叫做”workflow”或者”flow”，原意是水流，比喻项目像水流那样，顺畅、自然地向前流动，不会发生冲击、对撞、甚至漩涡。[&#x2F;scode]</p>
+<h2 id="功能驱动"><a href="#功能驱动" class="headerlink" title="功能驱动"></a>功能驱动</h2><p>需求是开发的起点，先有需求再有功能分支（feature branch）或者补丁分支（hotfix branch）。完成开发后，该分支就合并到主分支，然后被删除。</p>
+<h2 id="Git-flow"><a href="#Git-flow" class="headerlink" title="Git flow"></a>Git flow</h2><p>特点</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="../Git-flow-介绍以及使用/3433355365.png" alt="git-flow-ow.png"/></div><div class="image-meta"><span class="image-caption center">git-flow-ow.png</span></div></div>
+
+<p>项目存在两个长期分支。</p>
+<ul>
+<li>主分支 master</li>
+<li>开发分支 develop</li>
+</ul>
+<p>前者用于存放对外发布的版本；后者用于日常开发，存放最新的开发版。</p>
+<p>其次，项目存在三种短期分支。</p>
+<ul>
+<li>功能分支 feature branch</li>
+<li>补丁分支 hot fix branch</li>
+<li>预发分支 release branch</li>
+</ul>
+<p>一旦开发完成，它们就会被合并进develop 或 master, 然后被<span style="color:red">删除</span></p>
+<h2 id="安装-Git-flow"><a href="#安装-Git-flow" class="headerlink" title="安装 Git flow"></a>安装 Git flow</h2><p>windows版本的git 已经自带<br>其他版本 [其他版本安装地址][<a target="_blank" rel="noopener" href="https://github.com/petervanderdoes/gitflow-avh/wiki/Installation]">https://github.com/petervanderdoes/gitflow-avh/wiki/Installation]</a></p>
+<blockquote>
+<p>git-flow 并不是要替代 Git，它仅仅是非常聪明有效地把标准的 Git 命令用脚本组合了起来。<br>严格来讲，你并不需要安装什么特别的东西就可以使用 git-flow<br>工作流程。你只需要了解，哪些工作流程是由哪些单独的任务所组成的，并且附带上正确的参数，以及在一个正确的顺序下简单执行那些对应的 Git<br>命令就可以了。当然，如果你使用 git-flow 脚本就会更加方便了，你就不需要把这些命令和顺序都记在脑子里。</p>
+</blockquote>
+<h3 id="使用-初始化"><a href="#使用-初始化" class="headerlink" title="使用-初始化"></a>使用-初始化</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git flow init [-d]</span><br></pre></td></tr></table></figure>
+
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="../Git-flow-介绍以及使用/796022722.png" alt="7E0251C3-0A9B-4901-96E1-9A44AAC368B8.png"/></div><div class="image-meta"><span class="image-caption center">7E0251C3-0A9B-4901-96E1-9A44AAC368B8.png</span></div></div>
+
+<p>看起来是不是有点炫，但实际上它只是在你的分支上配置了一些命名规则。建议默认 [-d]</p>
+<h3 id="分支模式"><a href="#分支模式" class="headerlink" title="分支模式"></a>分支模式</h3><ul>
+<li>Master -只能用来包括产品代码。你不能直接工作在这个 master 分支上，而是在其他指定的，独立的特性分支中。不直接提交改动到 master 分支上也是很多工作流程的一个共同的规则。</li>
+<li>develop - 是你进行任何新的开发的基础分支。当你开始一个新的功能分支时，它将是_开发_的基础。另外，该分支也汇集所有已经完成的功能，并等待被整合到 master 分支中。</li>
+</ul>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="../Git-flow-介绍以及使用/1548306296.png" alt="4A6C9C4D-AB21-46E3-8140-2CCC13D77E94.png"/></div><div class="image-meta"><span class="image-caption center">4A6C9C4D-AB21-46E3-8140-2CCC13D77E94.png</span></div></div>
+
+<p>这两个分支被称作为<span style="color:red">长期分支</span>。它们会存活在项目的整个生命周期中。而其他的分支，例如针对功能的分支，针对发行的分支，仅仅只是临时存在的。它们是根据需要来创建的，当它们完成了自己的任务之后就会被删除掉。</p>
+<h2 id="功能开发"><a href="#功能开发" class="headerlink" title="功能开发"></a>功能开发</h2><h3 id="开始新功能"><a href="#开始新功能" class="headerlink" title="开始新功能"></a>开始新功能</h3><p>让我们开始一个新功能 “rss-feed”</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="../Git-flow-介绍以及使用/3204105017.png" alt="E412C074-A4AC-4B5C-8BE5-26F1FB32030D.png"/></div><div class="image-meta"><span class="image-caption center">E412C074-A4AC-4B5C-8BE5-26F1FB32030D.png</span></div></div>
+
+<p>Git flow 会打印出刚刚完成的操作的概述，如果你需要帮助随时可以</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git flow feature help</span><br></pre></td></tr></table></figure>
+
+<p>正如上面这个新功能一样，git-flow 会创建一个名为 “feature&#x2F;rss-feed” 的分支（这个 “feature&#x2F;” 前缀 是一个可配置的选项设置）。你已经知道了，在你做新功能开发时使用一个独立的分支是版本控制中最重要的规则之一。</p>
+<p>git-flow 也会直接签出这个新的分支(即已经自动切换到此新分支)，这样你就可以直接进行工作了。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="../Git-flow-介绍以及使用/2452821589.png" alt="3F8484EE-FB3C-4BE2-BE3F-59991007C87D.png"/></div><div class="image-meta"><span class="image-caption center">3F8484EE-FB3C-4BE2-BE3F-59991007C87D.png</span></div></div>
+
+<h3 id="完成一个功能"><a href="#完成一个功能" class="headerlink" title="完成一个功能"></a>完成一个功能</h3><p>经过一段时间艰苦地工作和一系列的<span style="color:red">聪明提交</span>，我们的新功能终于完成了：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git flow feature finish rest-feed</span><br></pre></td></tr></table></figure>
+
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="../Git-flow-介绍以及使用/1165045328.png" alt="F3D5E62B-A39C-47B6-850E-F043DEEE51A3.png"/></div><div class="image-meta"><span class="image-caption center">F3D5E62B-A39C-47B6-850E-F043DEEE51A3.png</span></div></div>
+
+<p>最重要的是，这个 “feature finish” 命令会把我们的工作整合到主 “develop” 分支中去。在这里它需要等待：</p>
+<ul>
+<li>一个在更广泛的 “开发” 背景下的全面测试。</li>
+<li>稍后和所有积攒在 “develop” 分支中的其它功能一起进行发布。</li>
+<li>之后，git-flow 也会进行清理操作。它会删除这个当下已经完成的功能分支，并且换到 “develop” 分支。</li>
+</ul>
+<h2 id="管理-release"><a href="#管理-release" class="headerlink" title="管理 release"></a>管理 release</h2><p>Release 管理是版本控制处理中的另外一个非常重要的话题。让我们来看看如何利用 git-flow 创建和发布 release。</p>
+<h3 id="创建-release"><a href="#创建-release" class="headerlink" title="创建 release"></a>创建 release</h3><p>当你认为现在在 “develop” 分支的代码已经是一个成熟的 release 版本时，这意味着：</p>
+<ul>
+<li>第一，它包括所有新的功能和必要的修复；</li>
+<li>第二，它已经被彻底的测试过了。</li>
+<li>如果上述两点都满足，那就是时候开始生成一个新的 release 了：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Git flow release start 1.1.5</span><br></pre></td></tr></table></figure>
+
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="../Git-flow-介绍以及使用/1146745782.png" alt="078BAD7C-ED05-4D8E-8104-4A9EF182061D.png"/></div><div class="image-meta"><span class="image-caption center">078BAD7C-ED05-4D8E-8104-4A9EF182061D.png</span></div></div>
+
+<p>请注意，release 分支是使用版本号命名的。这是一个明智的选择，这个命名方案还有一个很好的附带功能，那就是当我们完成了release 后，git-flow 会适当地_自动_去标记那些 release 提交。<br>有了一个 release 分支，再完成针对 release 版本号的最后准备工作（如果项目里的某些文件需要记录版本号），并且进行最后的编辑。</p>
+<h3 id="完成-release"><a href="#完成-release" class="headerlink" title="完成 release"></a>完成 release</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git flow release finish 1.1.5</span><br></pre></td></tr></table></figure>
+
+<p>需要填写tag  message</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="../Git-flow-介绍以及使用/2483612891.png" alt="5EDFB0A6-75B6-4BA8-870B-12A0BE86AD5D.png"/></div><div class="image-meta"><span class="image-caption center">5EDFB0A6-75B6-4BA8-870B-12A0BE86AD5D.png</span></div></div>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="../Git-flow-介绍以及使用/3671600544.png" alt="EBC3588A-F271-4454-9EDA-1BDE08D3B6C0.png"/></div><div class="image-meta"><span class="image-caption center">EBC3588A-F271-4454-9EDA-1BDE08D3B6C0.png</span></div></div>
+
+<p>这个命令会完成如下一系列的操作：</p>
+<ul>
+<li>首先，git-flow 会拉取远程仓库，以确保目前是最新的版本。</li>
+<li>然后，release 的内容会被合并到 “master” 和 “develop” 两个分支中去，这样不仅产品代码为最新的版本，而且新的功能分支也将基于最新代码。</li>
+<li>为便于识别和做历史参考，release 提交会被标记上这个 release 的名字（在我们的例子里是 “1.1.5”）。<br>清理操作，版本分支会被删除，并且回到 “develop”。</li>
+</ul>
+<blockquote>
+<p>从 Git 的角度来看，release 版本现在已经完成。依据你的设置，对 “master” 的提交可能已经触发了你所定义的部署流程，或者你可以通过手动部署，来让你的软件产品进入你的用户手中。</p>
+</blockquote>
+<h2 id="hotfix"><a href="#hotfix" class="headerlink" title="hotfix"></a>hotfix</h2><p>很多时候，仅仅在几个小时或几天之后，当对 release 版本作做全面测试时，可能就会发现一些小错误。<br>在这种情况下，git-flow 提供一个特定的 “hotfix” 工作流程（因为在这里不管使用 “功能” 分支流程，还是 “release” 分支流程都是不恰当的）。</p>
+<h3 id="创建Hotfixes"><a href="#创建Hotfixes" class="headerlink" title="创建Hotfixes"></a>创建Hotfixes</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Git flow hot fix start miss-link</span><br></pre></td></tr></table></figure>
+
+<p>这个命令会创建一个名为 “hotfix&#x2F;missing-link” 的分支。因为这是对产品代码进行修复，所以这个 hotfix 分支是基于 “master” 分支。<br>这也是和 release 分支最明显的区别，release 分支都是基于 “develop” 分支的。因为你不应该在一个还不完全稳定的开发分支上对产品代码进行地修复。<br>就像 release 一样，修复这个错误当然也会直接影响到项目的版本号！</p>
+<h3 id="完成-Hotfixes"><a href="#完成-Hotfixes" class="headerlink" title="完成 Hotfixes"></a>完成 Hotfixes</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git flow hotfix finish miss-link</span><br></pre></td></tr></table></figure>
+
+<p>这个过程非常类似于发布一个 release 版本：</p>
+<ul>
+<li>完成的改动会被合并到 “master” 中，同样也会合并到 “develop” 分支中，这样就可以确保这个错误不会再次出现在下一个 release 中。</li>
+<li>这个 hotfix 程序将被标记起来以便于参考。</li>
+<li>这个 hotfix 分支将被删除，然后切换到 “develop” 分支上去。</li>
+</ul>
+<p>还是和产生 release 的流程一样，现在需要编译和部署你的产品（如果这些操作不是自动被触发的话）。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="../Git-flow-介绍以及使用/3403517407.png" alt="59240A8C-E3F3-4218-B079-5D8FB9C60D3E.png"/></div><div class="image-meta"><span class="image-caption center">59240A8C-E3F3-4218-B079-5D8FB9C60D3E.png</span></div></div>
+
+<h2 id="回顾总结"><a href="#回顾总结" class="headerlink" title="回顾总结"></a>回顾总结</h2><p>首先，git-flow 并不会为 Git 扩展任何新的功能，它仅仅使用了脚本来捆绑了一系列 Git 命令来完成一些特定的工作流程。</p>
+<p>其次，定义一个固定的工作流程会使得团队协作更加简单容易。无论是一个 “版本控制的新手” 还是 “Git 专家”，每一个人都知道如何来正确地完成某个任务。</p>
+<p>记住，使用 git-flow 并不是必须的。当积攒了一定的使用经验后，很多团队会不再需要它了。当你能正确地理解工作流程的基本组成部分和目标的之后，你完全可以定义一个属于你自己的工作流程。</p>
+
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2021/06/29/%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E6%95%99%E4%BD%A0%E5%A6%82%E4%BD%95%E5%9C%A8-angular-%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8-eslint-%E4%BB%A5%E5%8F%8A-prettier-%E9%85%8D%E5%90%88-husky-%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E6%8E%A7%E5%88%B6%E4%BB%A3%E7%A0%81%E7%BB%93%E6%9E%84/">一步一步教你如何在 angular 项目中使用 eslint 以及 prettier 配合 husky 实现自动控制代码结构</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2021/05/10/macOS%E5%AE%89%E8%A3%85NVM/">macOS安装NVM</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.19.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

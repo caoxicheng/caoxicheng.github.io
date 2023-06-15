@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>一步一步教你如何在 angular 项目中使用 eslint 以及 prettier 配合 husky 实现自动控制代码结构 - 靓仔的窝点</title>
+
+  
+    <meta name="description" content="一步一步教你如何在 angular 项目中使用 eslint 以及 prettier 配合 husky 实现自动控制代码结构工具安装Prettier首先，安装prettier1npm install --save-dev --save-exact prettier   不同版本的 prettier 有不同的格式实现，所以需要精准安装，并且，您使用的任何插件或可共享配置都必须在任何一种情况下本地安装">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一步一步教你如何在 angular 项目中使用 eslint 以及 prettier 配合 husky 实现自动控制代码结构">
+<meta property="og:url" content="https://caoxicheng.github.io/2021/06/29/%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E6%95%99%E4%BD%A0%E5%A6%82%E4%BD%95%E5%9C%A8-angular-%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8-eslint-%E4%BB%A5%E5%8F%8A-prettier-%E9%85%8D%E5%90%88-husky-%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E6%8E%A7%E5%88%B6%E4%BB%A3%E7%A0%81%E7%BB%93%E6%9E%84/index.html">
+<meta property="og:site_name" content="靓仔的窝点">
+<meta property="og:description" content="一步一步教你如何在 angular 项目中使用 eslint 以及 prettier 配合 husky 实现自动控制代码结构工具安装Prettier首先，安装prettier1npm install --save-dev --save-exact prettier   不同版本的 prettier 有不同的格式实现，所以需要精准安装，并且，您使用的任何插件或可共享配置都必须在任何一种情况下本地安装">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-06-29T08:27:00.000Z">
+<meta property="article:modified_time" content="2023-06-15T15:30:30.719Z">
+<meta property="article:author" content="caoxicheng">
+<meta name="twitter:card" content="summary">
+  
+  
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">靓仔的窝点</div><div class="sub cap">普信版</div></a></div>
+
+<nav class="menu dis-select"></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">一步一步教你如何在 angular 项目中使用 eslint 以及 prettier 配合 husky 实现自动控制代码结构</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85"><span class="toc-text">工具安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Prettier"><span class="toc-text">Prettier</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A6%96%E5%85%88%EF%BC%8C%E5%AE%89%E8%A3%85prettier"><span class="toc-text">首先，安装prettier</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%84%B6%E5%90%8E%E5%88%9B%E5%BB%BA%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-prettierrc-json-%E8%BF%99%E6%98%AF%E6%88%91%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-text">然后创建配置文件 .prettierrc.json 这是我的配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%AB%E5%BF%98%E8%AE%B0%E4%BA%86%E5%BF%BD%E7%95%A5%E6%96%87%E4%BB%B6-perttierignore-%E4%B8%8B%E9%9D%A2%E6%98%AF%E6%88%91%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-text">别忘记了忽略文件 .perttierignore 下面是我的配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BD%93%E7%84%B6-vscode-%E6%9C%89%E9%85%8D%E5%A5%97%E7%9A%84%E6%8F%92%E4%BB%B6-Prettier-Code-formatter%EF%BC%8C%E5%AE%89%E8%A3%85%E4%B9%8B%E5%90%8E%E4%BC%9A%E8%AF%BB%E5%8F%96%E4%BD%A0%E5%B7%A5%E4%BD%9C%E5%8C%BA%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">当然 vscode 有配套的插件 Prettier - Code formatter，安装之后会读取你工作区的配置文件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Eslint"><span class="toc-text">Eslint</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%E8%BF%98%E6%98%AF%E5%AE%89%E8%A3%85"><span class="toc-text">第一步还是安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%84%B6%E5%90%8E%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-text">然后初始化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E8%A7%84%E5%88%99"><span class="toc-text">配置规则</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E5%90%88%E4%BD%BF%E7%94%A8"><span class="toc-text">配合使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-text">配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git-%E9%A2%84%E6%8F%90%E4%BA%A4%E9%92%A9%E5%AD%90"><span class="toc-text">Git 预提交钩子</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-text">写在最后</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div><div id="post-meta">发布于&nbsp;<time datetime="2021-06-29T08:27:00.000Z">2021-06-29</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>一步一步教你如何在 angular 项目中使用 eslint 以及 prettier 配合 husky 实现自动控制代码结构</span></h1>
+<h1 id="一步一步教你如何在-angular-项目中使用-eslint-以及-prettier-配合-husky-实现自动控制代码结构"><a href="#一步一步教你如何在-angular-项目中使用-eslint-以及-prettier-配合-husky-实现自动控制代码结构" class="headerlink" title="一步一步教你如何在 angular 项目中使用 eslint 以及 prettier 配合 husky 实现自动控制代码结构"></a>一步一步教你如何在 angular 项目中使用 eslint 以及 prettier 配合 husky 实现自动控制代码结构</h1><h2 id="工具安装"><a href="#工具安装" class="headerlink" title="工具安装"></a>工具安装</h2><h3 id="Prettier"><a href="#Prettier" class="headerlink" title="Prettier"></a>Prettier</h3><h4 id="首先，安装prettier"><a href="#首先，安装prettier" class="headerlink" title="首先，安装prettier"></a>首先，安装prettier</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev --save-exact prettier</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>不同版本的 prettier 有不同的格式实现，所以需要精准安装，并且，您使用的任何插件或可共享配置都必须在任何一种情况下本地安装!!!</p>
+</blockquote>
+<h4 id="然后创建配置文件-prettierrc-json-这是我的配置"><a href="#然后创建配置文件-prettierrc-json-这是我的配置" class="headerlink" title="然后创建配置文件 .prettierrc.json 这是我的配置"></a>然后创建配置文件 .prettierrc.json 这是我的配置</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;tabWidth&quot;: 2,</span><br><span class="line">    &quot;semi&quot;: true,</span><br><span class="line">    &quot;singleQuote&quot;: true,</span><br><span class="line">    &quot;jsxSingleQuote&quot;: true,</span><br><span class="line">    &quot;bracketSpacing&quot;: true,</span><br><span class="line">    &quot;jsxBracketSameLine&quot;: true,</span><br><span class="line">    &quot;printWidth&quot;: 120,</span><br><span class="line">    &quot;endOfLine&quot;: &quot;lf&quot;,</span><br><span class="line">    &quot;proseWrap&quot;: &quot;preserve&quot;,</span><br><span class="line">    &quot;trailingComma&quot;: &quot;es5&quot;,</span><br><span class="line">    &quot;useTabs&quot;: false</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="别忘记了忽略文件-perttierignore-下面是我的配置"><a href="#别忘记了忽略文件-perttierignore-下面是我的配置" class="headerlink" title="别忘记了忽略文件 .perttierignore 下面是我的配置"></a>别忘记了忽略文件 .perttierignore 下面是我的配置</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># Ignore artifacts:</span><br><span class="line">build</span><br><span class="line">coverage</span><br><span class="line">publish</span><br><span class="line"></span><br><span class="line">#尚未准备好处理html</span><br><span class="line">*.html</span><br></pre></td></tr></table></figure>
+
+<h4 id="当然-vscode-有配套的插件-Prettier-Code-formatter，安装之后会读取你工作区的配置文件"><a href="#当然-vscode-有配套的插件-Prettier-Code-formatter，安装之后会读取你工作区的配置文件" class="headerlink" title="当然 vscode 有配套的插件 Prettier - Code formatter，安装之后会读取你工作区的配置文件"></a>当然 vscode 有配套的插件 <code>Prettier - Code formatter</code>，安装之后会读取你工作区的配置文件</h4><h3 id="Eslint"><a href="#Eslint" class="headerlink" title="Eslint"></a>Eslint</h3><h4 id="第一步还是安装"><a href="#第一步还是安装" class="headerlink" title="第一步还是安装"></a>第一步还是安装</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install eslint --save-dev</span><br></pre></td></tr></table></figure>
+
+<h4 id="然后初始化"><a href="#然后初始化" class="headerlink" title="然后初始化"></a>然后初始化</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx eslint --init</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>–init假设您已经有一个package.json文件</p>
+</blockquote>
+<h4 id="配置规则"><a href="#配置规则" class="headerlink" title="配置规则"></a>配置规则</h4><p>初始化之后，你会在你的 <code>.eslintrc.&#123;js,yml,json&#125;</code> 文件中看到以下内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;rules&quot;: &#123;</span><br><span class="line">        &quot;semi&quot;: [&quot;error&quot;, &quot;always&quot;],</span><br><span class="line">        &quot;quotes&quot;: [&quot;error&quot;, &quot;double&quot;]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>名称 <code>semi</code> 和 <code>quotes</code> 是 ESLint 中规则的名称。第一个值是规则的错误级别，可以是以下值之一：</p>
+<p><code>off</code> 或 0 - 关闭规则<br><code>warn</code> 或 1 - 打开规则作为警告（不影响退出代码）<br><code>error</code> 或 2- 将规则作为错误打开（退出代码将为 1）</p>
+<blockquote>
+<p>具体规则描述👉<a target="_blank" rel="noopener" href="https://eslint.org/docs/rules/">规则</a></p>
+</blockquote>
+<p>您的.eslintrc.{js,yml,json}配置文件还将包含以下行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;extends&quot;: &quot;eslint:recommended&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这说明你的 <code>Eslint</code> 将会继承默认推荐规则, 即在<a target="_blank" rel="noopener" href="https://eslint.org/docs/rules/">规则</a>页面前有 ✅ 的规则</p>
+<h2 id="配合使用"><a href="#配合使用" class="headerlink" title="配合使用"></a>配合使用</h2><p>配合配合 <code>Eslint</code> 和 <code>Prettier</code> 你需要安装一个 Eslint 的 prettier 配置</p>
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev eslint-config-prettier</span><br></pre></td></tr></table></figure>
+
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>然后添加 <code>prettier</code> 到 <code>.eslintrc.*</code> 文件的 <code>extends</code> 数组中</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   &quot; extends &quot; : [</span><br><span class="line">     &quot; some-other-config-you-use &quot; ,</span><br><span class="line">     &quot; prettier &quot;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Git-预提交钩子"><a href="#Git-预提交钩子" class="headerlink" title="Git 预提交钩子"></a>Git 预提交钩子</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx mrm lint-staged</span><br></pre></td></tr></table></figure>
+
+<p>这将安装 <code>husky</code> 和 <code>lint-staged</code>，然后向项目添加一个配置，该配置package.json将在预提交挂钩中自动格式化支持的文件。</p>
+<p>此时你的 <code>package.json</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;lint-staged&quot;: &#123;</span><br><span class="line">    &quot;*.ts&quot;: &quot;eslint --cache --fix&quot;, // 默认为js，自行按需修改，下同</span><br><span class="line">    &quot;*.&#123;js,ts,css,scss,md&#125;&quot;: &quot;prettier --write&quot;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：如果您使用 ESLint，请确保 lint-staged Eslint 在 Prettier 之前而不是之后运行它。</p>
+</blockquote>
+<p>如果需要husky在你提交代码时检查您的提交信息则请看另外文章</p>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>本文只是应用的一次 <code>step to step</code> ，若想深入了解操作原理还需仔细阅读官方文档</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://eslint.org/docs/user-guide/getting-started">Eslint</a></li>
+<li><a target="_blank" rel="noopener" href="https://prettier.io/docs/en/index.html">Prettier</a></li>
+<li><a target="_blank" rel="noopener" href="https://prettier.io/docs/en/integrating-with-linters.html">Prettier 与 Linter配合</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/okonet/lint-staged">Lint-staged</a></li>
+</ol>
+
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2021/07/01/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%B0%83%E8%AF%95%E4%B9%8B%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/">前端开发调试之奇技淫巧</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2021/05/21/Git-flow-%E4%BB%8B%E7%BB%8D%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8/">Git  flow 介绍以及使用</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.19.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>
