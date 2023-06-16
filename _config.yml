@@ -6,14 +6,14 @@
 title: 靓仔的窝点
 subtitle: '普信版'
 description: '没想到我这样人也能改变世界'
-keywords:
+keywords: blog
 author: caoxicheng
 language: zh-CN
-timezone: ''
+timezone: 'Asia/Shanghai'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: https://caoxicheng.github.io
+url: https://caoxicheng.github.io/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -40,7 +40,7 @@ external_link:
   exclude: ''
 filename_case: 0
 # 预览草稿
-render_drafts: true
+render_drafts: false
 # 文档资源文件夹
 post_asset_folder: true
 relative_link: false
@@ -105,5 +105,5 @@ theme: stellar
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repo: git@github.com:caoxicheng/blog.git
+  repo: git@github.com:caoxicheng/caoxicheng.github.io.git
   branch: blog
