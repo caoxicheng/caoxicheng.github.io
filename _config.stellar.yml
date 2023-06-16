@@ -3,10 +3,10 @@ comments:
   # giscus
   # https://giscus.app/zh-CN
   giscus:
-    data-repo: caoxicheng/giscus_repo # [在此输入仓库]
-    data-repo-id: # [在此输入仓库 ID]
-    data-category: # [在此输入分类名]
-    data-category-id:
+    data-repo: caoxicheng/caoxicheng.github.io # [在此输入仓库]
+    data-repo-id: R_kgDOHt-Pxw # [在此输入仓库 ID]
+    data-category: Announcements # [在此输入分类名]
+    data-category-id: DIC_kwDOHt-Px84CXPTp
     data-mapping: pathname
     data-strict: 0
     data-reactions-enabled: 1
