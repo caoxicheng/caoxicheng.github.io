@@ -11,15 +11,15 @@ tags:
 [scode type="blue"]必须为webkit内核，即样式前缀需支持-webkit-,
 也可配合css选择使用，若不搭配使用，则为全局样式[/scode]
 
-伪元素|选择器|备注
-:-|:-|:-
-滚动条|::-webkit-scrollbar|整体
-滚动条按钮|::-webkit-scrollbar-button|上下方向键
-滚动条轨道|::-webkit-scrollbar-track|滚动条滚动的上下去区间
-滚动条-补偿|::-webkit-scrollbar-track-piece|滚动条轨道-滚动条实体的部分
-滚动条-实体|::-webkit-scrollbar-thumb|滚动条实体
-水平垂直滚动条交接部分|::-webkit-scrollbar-corner|基本为页面右下角
-拖动区|::-webkit-resize|与滚动条交接区重合，可以重设大小
+| 伪元素         | 选择器                             | 备注               |
+|:----------- |:------------------------------- |:---------------- |
+| 滚动条         | ::-webkit-scrollbar             | 整体               |
+| 滚动条按钮       | ::-webkit-scrollbar-button      | 上下方向键            |
+| 滚动条轨道       | ::-webkit-scrollbar-track       | 滚动条滚动的上下去区间      |
+| 滚动条-补偿      | ::-webkit-scrollbar-track-piece | 滚动条轨道-滚动条实体的部分   |
+| 滚动条-实体      | ::-webkit-scrollbar-thumb       | 滚动条实体            |
+| 水平垂直滚动条交接部分 | ::-webkit-scrollbar-corner      | 基本为页面右下角         |
+| 拖动区         | ::-webkit-resize                | 与滚动条交接区重合，可以重设大小 |
 
 [scode type="share"]tips:我们可以为这些对象中的每个对象设置边框，阴影，背景图像等样式，以创建完全自定义的滚动条，当然，且没有疑惑这些滚动条在按钮位置和单击行为方面仍将遵循操作系统的设置。[/scode]
 
@@ -83,14 +83,14 @@ tags:
     height: 16px;
     background-color: rgba(255,255,255,0);
 }
- 
+
 /*定义滚动条轨道 内阴影+圆角*/
 ::-webkit-scrollbar-track{
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
     border-radius: 10px;
     background-color: rgba(255,255,255,0);
 }
- 
+
 /*定义滑块 内阴影+圆角*/
 ::-webkit-scrollbar-thumb{
     border-radius: 10px;

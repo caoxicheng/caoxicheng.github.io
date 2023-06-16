@@ -49,8 +49,8 @@ ps: 附上本机实际时间对比
 
 > 效果斐然
 
-命令|时间
-:-|:-
-`node --max_old_space_size=8196 ./node_modules/@angular/cli/bin/ng build --prod`|3.4447分钟
-`ng build --prod`|2.8793分钟
-`改打包配置文件`|1.1223分钟
+| 命令                                                                               | 时间       |
+|:-------------------------------------------------------------------------------- |:-------- |
+| `node --max_old_space_size=8196 ./node_modules/@angular/cli/bin/ng build --prod` | 3.4447分钟 |
+| `ng build --prod`                                                                | 2.8793分钟 |
+| `改打包配置文件`                                                                        | 1.1223分钟 |
