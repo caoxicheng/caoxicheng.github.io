@@ -23,15 +23,15 @@
   <title>在Angular8中引入lodash - 靓仔的窝点</title>
 
   
-    <meta name="description" content="没想到我这样人也能改变世界">
+    <meta name="description" content="npm安装1npm install lodash --save  types定义TypeScript 的解決方案是另外使用 *.d.ts 。 一般来说，若是知名的 JavaScript library，都已经有人维护 type 定义包，其 package 的规则是 @types&#x2F;package 。 1npm install @types&#x2F;lodash --save  tsconfig.a">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在Angular8中引入lodash">
 <meta property="og:url" content="https://caoxicheng.github.io/2019/12/25/%E5%9C%A8Angular8%E4%B8%AD%E5%BC%95%E5%85%A5lodash/index.html">
 <meta property="og:site_name" content="靓仔的窝点">
-<meta property="og:description" content="没想到我这样人也能改变世界">
+<meta property="og:description" content="npm安装1npm install lodash --save  types定义TypeScript 的解決方案是另外使用 *.d.ts 。 一般来说，若是知名的 JavaScript library，都已经有人维护 type 定义包，其 package 的规则是 @types&#x2F;package 。 1npm install @types&#x2F;lodash --save  tsconfig.a">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-12-25T06:39:00.000Z">
-<meta property="article:modified_time" content="2023-06-15T16:19:37.147Z">
+<meta property="article:modified_time" content="2023-06-16T09:00:37.310Z">
 <meta property="article:author" content="caoxicheng">
 <meta property="article:tag" content="blog">
 <meta name="twitter:card" content="summary">
@@ -77,11 +77,20 @@
 </header>
 
 
-<div class="widgets"></div>
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">在Angular8中引入lodash</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#npm%E5%AE%89%E8%A3%85"><span class="toc-text">npm安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#types%E5%AE%9A%E4%B9%89"><span class="toc-text">types定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tsconfig-app-json"><span class="toc-text">tsconfig.app.json</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ts%E6%96%87%E4%BB%B6%E4%B8%AD"><span class="toc-text">ts文件中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text">结论</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
 
 
     </aside>
-    <div class='l_main list'>
+    <div class='l_main'>
       
 
       
@@ -92,6 +101,18 @@
 
 <article class='md-text content post'>
 <h1 class="article-title"><span>在Angular8中引入lodash</span></h1>
+<h2 id="npm安装"><a href="#npm安装" class="headerlink" title="npm安装"></a>npm安装</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install lodash --save</span><br></pre></td></tr></table></figure>
+
+<h2 id="types定义"><a href="#types定义" class="headerlink" title="types定义"></a>types定义</h2><p>TypeScript 的解決方案是另外使用 *.d.ts 。</p>
+<p>一般来说，若是知名的 JavaScript library，都已经有人维护 type 定义包，其 package 的规则是 @types&#x2F;package 。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install @types/lodash --save</span><br></pre></td></tr></table></figure>
+
+<h2 id="tsconfig-app-json"><a href="#tsconfig-app-json" class="headerlink" title="tsconfig.app.json"></a>tsconfig.app.json</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;extends&quot;: &quot;./tsconfig.json&quot;,</span><br><span class="line">  &quot;compilerOptions&quot;: &#123;</span><br><span class="line">    &quot;outDir&quot;: &quot;./out-tsc/app&quot;,</span><br><span class="line">    &quot;types&quot;: [&quot;swiper&quot;,&quot;lodash&quot;] //因为我项目还引入了swiper</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;include&quot;: [</span><br><span class="line">    &quot;src/**/*.ts&quot;</span><br><span class="line">  ],</span><br><span class="line">  &quot;exclude&quot;: [</span><br><span class="line">    &quot;src/test.ts&quot;,</span><br><span class="line">    &quot;src/**/*.spec.ts&quot;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="ts文件中"><a href="#ts文件中" class="headerlink" title="ts文件中"></a>ts文件中</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import * as _ from &#x27;lodash&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>至此就能在ts中使用了</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>实际上若有 Angular 版本的 package，当然应优先使用；若遇到必须使用 JavaScript package 不可的场合，除了安装 package 外，还要安装 type 定义包，并在 tsconfig.json 设定，如此才可以在 Angular 正确使用并通过编译</p>
 
 
 

@@ -23,15 +23,15 @@
   <title>Angular中指令(directive)的初试 - 靓仔的窝点</title>
 
   
-    <meta name="description" content="没想到我这样人也能改变世界">
+    <meta name="description" content="指令的概要在Angular中有三种类型的指令：  组件–拥有模板的指令 结构型指令– 通过添加和移除DOM元素改变DOM布局的指令（NgFor、NgIf） 属性型指令 – 改变元素、组件或其他指令的外观和行为的指令（NgStyle）  创建一个简单的属性型指令1ng generate directive directive&#x2F;hightlight  &#x2F;&#x2F;添加前置文件夹便于逻辑清理  @Directi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Angular中指令(directive)的初试">
 <meta property="og:url" content="https://caoxicheng.github.io/2020/02/19/Angular%E4%B8%AD%E6%8C%87%E4%BB%A4-directive-%E7%9A%84%E5%88%9D%E8%AF%95/index.html">
 <meta property="og:site_name" content="靓仔的窝点">
-<meta property="og:description" content="没想到我这样人也能改变世界">
+<meta property="og:description" content="指令的概要在Angular中有三种类型的指令：  组件–拥有模板的指令 结构型指令– 通过添加和移除DOM元素改变DOM布局的指令（NgFor、NgIf） 属性型指令 – 改变元素、组件或其他指令的外观和行为的指令（NgStyle）  创建一个简单的属性型指令1ng generate directive directive&#x2F;hightlight  &#x2F;&#x2F;添加前置文件夹便于逻辑清理  @Directi">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-02-19T03:34:00.000Z">
-<meta property="article:modified_time" content="2023-06-15T16:17:41.665Z">
+<meta property="article:modified_time" content="2023-06-16T09:00:33.206Z">
 <meta property="article:author" content="caoxicheng">
 <meta property="article:tag" content="blog">
 <meta name="twitter:card" content="summary">
@@ -77,11 +77,20 @@
 </header>
 
 
-<div class="widgets"></div>
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Angular中指令(directive)的初试</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E7%9A%84%E6%A6%82%E8%A6%81"><span class="toc-text">指令的概要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%B1%9E%E6%80%A7%E5%9E%8B%E6%8C%87%E4%BB%A4"><span class="toc-text">创建一个简单的属性型指令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%B1%9E%E6%80%A7%E5%9E%8B%E6%8C%87%E4%BB%A4"><span class="toc-text">使用属性型指令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B8%E5%BA%94%E7%94%A8%E6%88%B7%E4%BD%BF%E7%94%A8%E7%9A%84%E4%BA%8B%E4%BB%B6"><span class="toc-text">相应用户使用的事件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E9%9D%A2%E6%98%AF%E4%BF%AE%E6%94%B9%E5%90%8E%E7%9A%84%E6%8C%87%E4%BB%A4%E4%BB%A3%E7%A0%81-directive-ts"><span class="toc-text">下面是修改后的指令代码 directive.ts</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-Input-%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A%E5%90%91%E6%8C%87%E4%BB%A4%E4%BC%A0%E9%80%92%E5%80%BC"><span class="toc-text">使用@Input 数据绑定向指令传递值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%91%E5%AE%9A-Input-%E5%B1%9E%E6%80%A7"><span class="toc-text">绑定@Input 属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E7%BB%88%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%99%A8%E4%BB%A3%E7%A0%81"><span class="toc-text">最终版本控制器代码</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
 
 
     </aside>
-    <div class='l_main list'>
+    <div class='l_main'>
       
 
       
@@ -92,6 +101,53 @@
 
 <article class='md-text content post'>
 <h1 class="article-title"><span>Angular中指令(directive)的初试</span></h1>
+<h2 id="指令的概要"><a href="#指令的概要" class="headerlink" title="指令的概要"></a>指令的概要</h2><p>在Angular中有三种类型的指令：</p>
+<ol>
+<li><strong>组件</strong>–拥有模板的指令<app-root></app-root></li>
+<li><strong>结构型指令</strong>– 通过添加和移除DOM元素改变DOM布局的指令（NgFor、NgIf）</li>
+<li><strong>属性型指令</strong> – 改变元素、组件或其他指令的外观和行为的指令（NgStyle）</li>
+</ol>
+<h2 id="创建一个简单的属性型指令"><a href="#创建一个简单的属性型指令" class="headerlink" title="创建一个简单的属性型指令"></a>创建一个简单的属性型指令</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ng generate directive directive/hightlight  //添加前置文件夹便于逻辑清理</span><br></pre></td></tr></table></figure>
+
+<p>@Directive 装饰器的配置属性中指定了该指令的 CSS 属性型选择器 <code>[appHighlight]</code></p>
+<p>这里的方括号([])表示它的属性型选择器。 Angular 会在模板中定位每个拥有名叫 appHighlight 属性的元素，并且为这些元素加上本指令的逻辑。</p>
+<p>正因如此，这类指令被称为 属性选择器 。</p>
+<p>把生成的指令控制器代码修改成这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import &#123; Directive, ElementRef &#125; from &#x27;@angular/core&#x27;;</span><br><span class="line"></span><br><span class="line">@Directive(&#123;</span><br><span class="line">  selector: &#x27;[appHighlight]&#x27;</span><br><span class="line">&#125;)</span><br><span class="line">export class HighlightDirective &#123;</span><br><span class="line">    constructor(el: ElementRef) &#123;</span><br><span class="line">       el.nativeElement.style.backgroundColor = &#x27;yellow&#x27;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>import 语句从 Angular 的 core 库中导入了一个 ElementRef 符号。</p>
+<p>[post cid&#x3D;”358” &#x2F;]</p>
+<p>你可以在指令的构造函数中使用 ElementRef 来注入宿主 DOM 元素的引用，也就是你放置 appHighlight 的那个元素。</p>
+<p>ElementRef 通过其 nativeElement 属性给你了直接访问宿主 DOM 元素的能力。</p>
+<p>这里的第一个实现把宿主元素的背景色设置为了黄色。</p>
+<h2 id="使用属性型指令"><a href="#使用属性型指令" class="headerlink" title="使用属性型指令"></a>使用属性型指令</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p appHighlight&gt;Highlight me!&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="相应用户使用的事件"><a href="#相应用户使用的事件" class="headerlink" title="相应用户使用的事件"></a>相应用户使用的事件</h2><p><a target="_blank" rel="noopener" href="https://angular.cn/api/core/HostListener">@HostListener</a> 装饰器让你订阅某个属性型指令所在的宿主 DOM 元素的事件，在这个例子中就是 <code>&lt;p&gt;</code>。</p>
+<p>[scode type&#x3D;”blue”]<br>当然，你可以通过标准的 JavaScript 方式手动给宿主 DOM 元素附加一个事件监听器。 但这种方法至少有三个问题：</p>
+<ol>
+<li>必须正确的书写事件监听器。</li>
+<li>当指令被销毁的时候，必须拆卸事件监听器，否则会导致内存泄露。</li>
+<li>必须直接和 DOM API 打交道，应该避免这样做。<br>[&#x2F;scode]</li>
+</ol>
+<h3 id="下面是修改后的指令代码-directive-ts"><a href="#下面是修改后的指令代码-directive-ts" class="headerlink" title="下面是修改后的指令代码 directive.ts"></a>下面是修改后的指令代码 directive.ts</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">import &#123; Directive, ElementRef, HostListener &#125; from &#x27;@angular/core&#x27;;</span><br><span class="line"></span><br><span class="line">@Directive(&#123;</span><br><span class="line">  selector: &#x27;[appHighlight]&#x27;</span><br><span class="line">&#125;)</span><br><span class="line">export class HighlightDirective &#123;</span><br><span class="line">  constructor(private el: ElementRef) &#123; &#125;</span><br><span class="line"></span><br><span class="line">  @HostListener(&#x27;mouseenter&#x27;) onMouseEnter() &#123;</span><br><span class="line">    this.highlight(&#x27;yellow&#x27;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @HostListener(&#x27;mouseleave&#x27;) onMouseLeave() &#123;</span><br><span class="line">    this.highlight(null);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  private highlight(color: string) &#123;</span><br><span class="line">    this.el.nativeElement.style.backgroundColor = color;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是这样子并不灵活！这不可取。</p>
+<h2 id="使用-Input-数据绑定向指令传递值"><a href="#使用-Input-数据绑定向指令传递值" class="headerlink" title="使用@Input 数据绑定向指令传递值"></a>使用<a target="_blank" rel="noopener" href="https://angular.cn/api/core/Input">@Input</a> 数据绑定向指令传递值</h2><p>先从@angular&#x2F;core 中导入input</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import &#123; Directive, ElementRef, HostListener, Input &#125; from &#x27;@angular/core&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>然后把highlightColor属性添加到指令中 like this:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Input() hightColor: string;</span><br></pre></td></tr></table></figure>
+
+<h2 id="绑定-Input-属性"><a href="#绑定-Input-属性" class="headerlink" title="绑定@Input 属性"></a>绑定@Input 属性</h2><p>@Input 装饰器，它的作用是往类上添加了一些元数据，从而让该指令的lightLight <code>能用于</code>绑定</p>
+<p>模板代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;p appHighlight highlightColor=&quot;yellow&quot;&gt;Highlighted in yellow&lt;/p&gt;</span><br><span class="line">&lt;p appHighlight [highlightColor]=&quot;&#x27;orange&#x27;&quot;&gt;Highlighted in orange&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+
+<p>问题来了，为什么要重复写，能不能整合呢？<br>可以！<br>@Input 提供了别名功能</p>
+<h2 id="最终版本控制器代码"><a href="#最终版本控制器代码" class="headerlink" title="最终版本控制器代码"></a>最终版本控制器代码</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">import &#123; Directive, ElementRef, HostListener, Input &#125; from &#x27;@angular/core&#x27;;</span><br><span class="line"></span><br><span class="line">@Directive(&#123;</span><br><span class="line">  selector: &#x27;[appHighlight]&#x27;</span><br><span class="line">&#125;)</span><br><span class="line">export class HighlightDirective &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  @Input(&#x27;appHighlight&#x27;) highlightColor: string;</span><br><span class="line"></span><br><span class="line">  constructor(</span><br><span class="line">    private el: ElementRef</span><br><span class="line">    ) &#123; &#125;</span><br><span class="line"></span><br><span class="line">  @HostListener(&#x27;mouseenter&#x27;) onMouseEnter() &#123;</span><br><span class="line">    this.highlight(this.highlightColor || &#x27;yellow&#x27;); //这里防止有些小可爱忘记传值OωO</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @HostListener(&#x27;mouseleave&#x27;) onMouseLeave() &#123;</span><br><span class="line">    this.highlight(null);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  private highlight(color: string):void &#123;</span><br><span class="line">    this.el.nativeElement.style.backgroundColor = color;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>改动之后的调用方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p [appHighlight]=&quot;&#x27;red&#x27;&quot;&gt;Highlight me!&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+
 
 
 
