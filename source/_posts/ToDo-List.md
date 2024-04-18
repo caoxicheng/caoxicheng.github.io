@@ -1,6 +1,7 @@
 ---
 title: ToDo-List
 date: 2019-08-29 01:00
+sticky: 1
 tags:
 ---
 
