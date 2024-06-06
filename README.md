@@ -41,7 +41,7 @@ hexo publish [layout] <filename>
 ### service
 
 ```
-hexo service
+hexo server
 ```
 
 启动服务器。默认情况下，访问网址为： `http://localhost:4000/`
