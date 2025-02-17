@@ -25,6 +25,4 @@ const myPlugin = {
 app.use(myPlugin, { someOption: true })
 ```
 
-![img.png](./vue-use/deepseek-vue-use.png)
-
 就是手动绑定vue实例的快捷方案,注册组件,注册服务,方法
