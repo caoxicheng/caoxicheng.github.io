@@ -3,6 +3,7 @@ layout: tech
 title: vue.use
 date: 2025-02-17 16:45:24
 tags: vue
+topic: web
 ---
 
 在看vue的插件时,经常看到app.use(xxx)这样的写法,心生好奇

@@ -1,0 +1,4 @@
+name: web # 在面包屑导航上会显示较短的名字
+title: web前端 - show me the code # 在列表页会显示完整的专栏标题
+description: 前端开发相关的知识和经验分享。
+order_by: -date # 默认是按发布日期倒序排序
