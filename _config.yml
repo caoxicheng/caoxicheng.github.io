@@ -107,3 +107,4 @@ deploy:
   type: git
   repo: git@github.com:caoxicheng/caoxicheng.github.io.git
   branch: blog
+  message: "Build at {{ now('YYYY-MM-DD HH:mm:ss Z') }}"
