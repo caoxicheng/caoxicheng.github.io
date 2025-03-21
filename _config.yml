@@ -6,17 +6,10 @@ douban:
   builtin: true # 嵌入 generate 命令中,无需单独使用
   dynamic: true # 自动更新数据
   id: 191537030  # 豆瓣数字 ID
-  book:
-    path: books/index.html  # 自定义路径
-    title: '我的书单'
-    quote: '阅读记录'
-    actions:
-      - wish
-      - collect
   movie:
     path: movie/index.html
-    title: '我的影单'
-    quote: '观影记录'
+    title: '请挑选你的人生剧本'
+    quote: '第二人生'
     actions:
       - wish
       - collect
