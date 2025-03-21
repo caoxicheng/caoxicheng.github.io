@@ -5,7 +5,7 @@
 douban:
   builtin: true # 嵌入 generate 命令中,无需单独使用
   dynamic: true # 自动更新数据
-  id: 191537030  # 豆瓣数字 ID
+  id: 201814195  # 豆瓣数字 ID
   movie:
     path: movie/index.html
     title: '请挑选你的人生剧本'
