@@ -45,8 +45,8 @@ tags:
 5. node.js
 6. flutter
 7. 小程序
-8. 如何发布一个npm
-9. 如何发布一个angular插件
+8. ~~[如何发布一个npm](https://caoxicheng.github.io/2022/02/07/an-zhuang-bing-shi-yong-verdaccio-bu-shu-si-you-npm-cang-ku/)~~
+9. ~~如何发布一个angular插件~~
 
 ## 待看电影
 
