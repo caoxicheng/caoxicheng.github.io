@@ -14,7 +14,7 @@ tags:
 
 特点
 
-![git-flow-ow.png](../Git-flow-介绍以及使用/3433355365.png)
+![git-flow-ow.png](3433355365.png)
 
 项目存在两个长期分支。
 
@@ -47,7 +47,7 @@ windows版本的git 已经自带
 git flow init [-d]
 ```
 
-![7E0251C3-0A9B-4901-96E1-9A44AAC368B8.png](../Git-flow-介绍以及使用/796022722.png)
+![7E0251C3-0A9B-4901-96E1-9A44AAC368B8.png](796022722.png)
 
 看起来是不是有点炫，但实际上它只是在你的分支上配置了一些命名规则。建议默认 [-d]
 
@@ -56,7 +56,7 @@ git flow init [-d]
 - Master -只能用来包括产品代码。你不能直接工作在这个 master 分支上，而是在其他指定的，独立的特性分支中。不直接提交改动到 master 分支上也是很多工作流程的一个共同的规则。
 - develop - 是你进行任何新的开发的基础分支。当你开始一个新的功能分支时，它将是_开发_的基础。另外，该分支也汇集所有已经完成的功能，并等待被整合到 master 分支中。
 
-![4A6C9C4D-AB21-46E3-8140-2CCC13D77E94.png](../Git-flow-介绍以及使用/1548306296.png)
+![4A6C9C4D-AB21-46E3-8140-2CCC13D77E94.png](1548306296.png)
 
 这两个分支被称作为<span style="color:red">长期分支</span>。它们会存活在项目的整个生命周期中。而其他的分支，例如针对功能的分支，针对发行的分支，仅仅只是临时存在的。它们是根据需要来创建的，当它们完成了自己的任务之后就会被删除掉。
 
@@ -66,7 +66,7 @@ git flow init [-d]
 
 让我们开始一个新功能 “rss-feed”
 
-![E412C074-A4AC-4B5C-8BE5-26F1FB32030D.png](../Git-flow-介绍以及使用/3204105017.png)
+![E412C074-A4AC-4B5C-8BE5-26F1FB32030D.png](3204105017.png)
 
 Git flow 会打印出刚刚完成的操作的概述，如果你需要帮助随时可以
 
@@ -78,7 +78,7 @@ git flow feature help
 
 git-flow 也会直接签出这个新的分支(即已经自动切换到此新分支)，这样你就可以直接进行工作了。
 
-![3F8484EE-FB3C-4BE2-BE3F-59991007C87D.png](../Git-flow-介绍以及使用/2452821589.png)
+![3F8484EE-FB3C-4BE2-BE3F-59991007C87D.png](2452821589.png)
 
 ### 完成一个功能
 
@@ -88,7 +88,7 @@ git-flow 也会直接签出这个新的分支(即已经自动切换到此新分�
 git flow feature finish rest-feed
 ```
 
-![F3D5E62B-A39C-47B6-850E-F043DEEE51A3.png](../Git-flow-介绍以及使用/1165045328.png)
+![F3D5E62B-A39C-47B6-850E-F043DEEE51A3.png](1165045328.png)
 
 最重要的是，这个 “feature finish” 命令会把我们的工作整合到主 “develop” 分支中去。在这里它需要等待：
 
@@ -112,7 +112,7 @@ Release 管理是版本控制处理中的另外一个非常重要的话题。让
 Git flow release start 1.1.5
 ```
 
-![078BAD7C-ED05-4D8E-8104-4A9EF182061D.png](../Git-flow-介绍以及使用/1146745782.png)
+![078BAD7C-ED05-4D8E-8104-4A9EF182061D.png](1146745782.png)
 
 请注意，release 分支是使用版本号命名的。这是一个明智的选择，这个命名方案还有一个很好的附带功能，那就是当我们完成了release 后，git-flow 会适当地_自动_去标记那些 release 提交。
 有了一个 release 分支，再完成针对 release 版本号的最后准备工作（如果项目里的某些文件需要记录版本号），并且进行最后的编辑。
@@ -125,8 +125,8 @@ git flow release finish 1.1.5
 
 需要填写tag  message
 
-![5EDFB0A6-75B6-4BA8-870B-12A0BE86AD5D.png](../Git-flow-介绍以及使用/2483612891.png)
-![EBC3588A-F271-4454-9EDA-1BDE08D3B6C0.png](../Git-flow-介绍以及使用/3671600544.png)
+![5EDFB0A6-75B6-4BA8-870B-12A0BE86AD5D.png](2483612891.png)
+![EBC3588A-F271-4454-9EDA-1BDE08D3B6C0.png](3671600544.png)
 
 这个命令会完成如下一系列的操作：
 
@@ -166,7 +166,7 @@ git flow hotfix finish miss-link
 
 还是和产生 release 的流程一样，现在需要编译和部署你的产品（如果这些操作不是自动被触发的话）。
 
-![59240A8C-E3F3-4218-B079-5D8FB9C60D3E.png](../Git-flow-介绍以及使用/3403517407.png)
+![59240A8C-E3F3-4218-B079-5D8FB9C60D3E.png](3403517407.png)
 
 ## 回顾总结
 

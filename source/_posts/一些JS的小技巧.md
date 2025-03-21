@@ -4,7 +4,7 @@ date: 2019-11-21 11:35
 tags:
 ---
 
-![javascript.jpg](../一些JS的小技巧/2237123605.jpg)
+![javascript.jpg](2237123605.jpg)
 
 ## 快速生成6位验证码
 

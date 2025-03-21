@@ -46,6 +46,10 @@ filename_case: 0
 render_drafts: true
 # 文档资源文件夹
 post_asset_folder: true
+# 自动图片匹配路径
+marked:
+  prependRoot: true
+  postAsset: true
 relative_link: false
 future: true
 highlight:

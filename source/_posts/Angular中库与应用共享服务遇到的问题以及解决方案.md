@@ -99,7 +99,7 @@ export class SubComponentComponent implements OnInit {
 
 项目启动之后直接错误
 
-![image.png](../Angular中库与应用共享服务遇到的问题以及解决方案/2257690684.png)
+![image.png](2257690684.png)
 
 也去官方查看这个问题的描述
 
@@ -109,7 +109,7 @@ export class SubComponentComponent implements OnInit {
 
 也尝试过绕过去的办法，比如说
 
-![image.png](../Angular中库与应用共享服务遇到的问题以及解决方案/935070070.png)
+![image.png](935070070.png)
 
 或者使用`forwardRef`关键字，均无效
 

@@ -6,7 +6,7 @@ tags:
 
 这里记录一下日常工作中使用的到的git命令
 
-![git-zoom.png](../记录下工作中需要用到的GIT命令/1369499882.png)
+![git-zoom.png](1369499882.png)
 
 [scode type="blue"]关于git flow，新版本git已默认附带，使用需要初始化[/scode]
 

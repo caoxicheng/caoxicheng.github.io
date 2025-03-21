@@ -22,7 +22,7 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh
 
 不过我使用命令安装的时候一直遇到网络情况,然后我仔细阅读了一下说明文档
 
-![安装说明](../macOS安装NVM/1020905986.jpg)
+![安装说明](1020905986.jpg)
 
 也可以直接运行安装脚本,那直接走你!
 
@@ -35,7 +35,7 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh
 
 然后打开 ~ 下的 '.zshrc' (不同终端不同文件)
 
-![终端配置文件](../macOS安装NVM/2189619559.jpg)
+![终端配置文件](2189619559.jpg)
 
 保存,然后
 
