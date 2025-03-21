@@ -2,6 +2,28 @@
 ## Docs: https://hexo.io/docs/configuration.html
 ## Source: https://github.com/hexojs/hexo/
 
+douban:
+  builtin: true # 嵌入 generate 命令中,无需单独使用
+  id: 191537030  # 豆瓣数字 ID
+  book:
+    path: books/index.html  # 自定义路径
+    title: '我的书单'
+    quote: '阅读记录'
+    actions:
+      - do
+      - wish
+      - collect
+  movie:
+    path: movie/index.html
+    title: '我的影单'
+    quote: '观影记录'
+    actions:
+      - do
+      - wish
+      - collect
+  timeout: 10000  # 超时时间（可调整）
+# 若仅需电影或游戏页面，注释其他配置即可:cite[1]:cite[8]
+
 # Site
 title: 靓仔的窝点
 subtitle: '普信版'
