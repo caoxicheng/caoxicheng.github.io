@@ -40,6 +40,7 @@ vue2实现
 ```vue
 <MyComponent
     :value="value"
+    @input="value = $event"
 ```
 
 vue3实现
