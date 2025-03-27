@@ -2,7 +2,6 @@
 title: vue中的provide和inject
 date: 2025-03-10 17:00:56
 tags: vue
-topic: web
 ---
 
 ## 基础介绍
