@@ -31,3 +31,9 @@ date: 2023-10-01
 cover: /images/cover.jpg  # 封面图路径
 ---
 ```
+
+### 图片
+```markdown
+[![drop-down](dropdown.png)](https://github.com/DevCloudFE/ng-devui/pull/364)
+```
+> 博主安装了插件,会自动寻找同名文件夹
