@@ -37,3 +37,9 @@ cover: /images/cover.jpg  # 封面图路径
 [![drop-down](dropdown.png)](https://github.com/DevCloudFE/ng-devui/pull/364)
 ```
 > 博主安装了插件,会自动寻找同名文件夹
+
+```markdown
+{% asset_img example.jpg This is an example image %}
+{% asset_img "spaced asset.jpg" "spaced title" %}
+```
+>通过这种方式，图片将会同时出现在文章和主页以及归档页中。
