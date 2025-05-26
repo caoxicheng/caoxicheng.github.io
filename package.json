@@ -12,6 +12,7 @@
     "version": "7.2.0"
   },
   "dependencies": {
+    "gray-matter": "^4.0.3",
     "hexo": "^7.2.0",
     "hexo-bridge": "^2.0.4",
     "hexo-deployer-git": "^4.0.0",
