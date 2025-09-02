@@ -1,0 +1,94 @@
+{
+  "timestamp": "2025-09-02T17:26:53.000Z",
+  "modules": [
+    {
+      "path": "source/_posts",
+      "name": "_posts",
+      "language": "markdown",
+      "entry_point": "various .md files",
+      "has_tests": false,
+      "has_config": false,
+      "coverage": {
+        "scanned_files": 100,
+        "total_files": 139,
+        "percentage": 71.9
+      },
+      "gaps": [
+        "缺接口详细定义",
+        "缺测试策略详情"
+      ]
+    },
+    {
+      "path": "source/_drafts",
+      "name": "_drafts",
+      "language": "markdown",
+      "entry_point": "various .md files",
+      "has_tests": false,
+      "has_config": false,
+      "coverage": {
+        "scanned_files": 1,
+        "total_files": 1,
+        "percentage": 100
+      },
+      "gaps": [
+        "缺接口详细定义",
+        "缺测试策略详情"
+      ]
+    },
+    {
+      "path": "source/_data/topic",
+      "name": "topic",
+      "language": "yaml",
+      "entry_point": "various .yml files",
+      "has_tests": false,
+      "has_config": true,
+      "coverage": {
+        "scanned_files": 4,
+        "total_files": 4,
+        "percentage": 100
+      },
+      "gaps": [
+        "缺接口详细定义",
+        "缺测试策略详情"
+      ]
+    }
+  ],
+  "coverage": {
+    "scanned_files": 105,
+    "total_files": 144,
+    "percentage": 72.9
+  },
+  "ignored": {
+    "patterns": [
+      "node_modules/**",
+      ".git/**",
+      ".github/**",
+      "dist/**",
+      "build/**",
+      ".next/**",
+      "__pycache__/**",
+      "*.lock",
+      "*.log",
+      "*.bin",
+      "*.pdf",
+      "*.png",
+      "*.jpg",
+      "*.jpeg",
+      "*.gif",
+      "*.mp4",
+      "*.zip",
+      "*.tar",
+      "*.gz"
+    ],
+    "top_directories_skipped": [
+      "node_modules"
+    ]
+  },
+  "truncated": false,
+  "next_suggested_paths": [
+    "source/_posts/tech/angular",
+    "source/_posts/tech/javascript",
+    "source/_posts/tech/css",
+    "source/_posts/tech/engineering"
+  ]
+}
