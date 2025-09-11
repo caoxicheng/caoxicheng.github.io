@@ -5,6 +5,7 @@ tags: []
 categories:
   - 技术
   - MCP
+topic: 文档
 excerpt: >-
   Figma-MCP是一个Model Context Protocol (MCP)服务器，它使AI编码工具（如Cursor、Claude Code等）能够访问Figma设计文件中的布局和样式信息。这有助于AI更准确地根据设计实现代码，提高开发效率。
 description: Figma-MCP-让AI编码工具访问Figma设计数据 - 详细介绍与实践经验分享
